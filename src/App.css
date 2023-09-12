@@ -1,0 +1,203 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+}
+.nevbar{
+  height: 10vh;
+  width: 100vw;
+  background-color: #00B4D8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+.nevbar span{
+  background-image: url(../public/icon.png);
+   height: 60px ;
+   width: 60px;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.nevbar button{
+  height: 40px;
+  width: 100px;
+  font-size: large;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.11);
+box-shadow:0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12); ;
+border: none;
+border-radius: 20px;
+}
+.nevbar button:hover{
+transform: scale(1.03 ,1.03);
+}
+
+.container{
+  height: 90vh;
+  width: 100vw;
+  background-image: url(../public/bg.jpg); /* background-color: rgba(0, 0, 0, 0.05); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.value{
+  color: aliceblue;
+}
+.box{
+  width: 350px;
+  height: 380px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  border:none;
+  background-color:  rgb(255, 255, 255);
+  border-radius: 15px;
+  box-sizing: border-box;
+ border: 0.8px  solid rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 0.5px 0.5px rgba(0, 0, 0, 0.089);
+}
+
+.box h2{
+margin-top: 10px;
+height: 30px;
+  width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;  
+
+}
+.minibox1{
+  
+  margin-left: 8px;
+  margin-top: 20px;
+  height: 70px;
+  width: 95%;
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.1);
+  
+  background-color: rgba(0, 0, 0, 0.04);
+  border: none;
+  border-radius: 9px;
+   display: flex;
+   justify-content:space-between;
+align-items: center;
+}
+.minibox1 button{
+  height: 34px;
+  padding: 0 8px;
+  width: 80px;
+  
+  margin-left: 5px;
+  border: none;
+  border-radius: 25px;
+    color: rgba(0, 0, 0, 0.87);
+        font-size: 18px;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        background-color: rgba(0, 0, 0, 0.11);
+box-shadow:0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12); ;
+cursor: pointer;
+
+}
+.minibox1 button:hover{
+transform: scale(1.03 ,1.03);
+}
+
+
+.minibox1 input{
+ height: 30px;
+  width: 170px;
+  margin: 3px;
+  border-radius: 9px;
+
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  text-align: right;
+}
+.minibox1 input::placeholder{
+  color: rgba(0, 0, 0, 0.719);
+
+}
+
+
+.minibox3{
+  
+  margin-left: 0px;
+  margin-top: 20px;
+  padding-top: 12px;
+  height: 90px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  /* border: none; */
+ border: 2px  solid rgba(0, 0, 0, 0.1);
+  
+  /* box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.1); */
+
+  border-left: none;
+  border-right: none;
+
+   display: flex;
+   justify-content:space-between;
+   flex-direction: column;
+align-items: center;
+}
+.para {
+  height: 40px;
+  width: 345px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.minibox4{
+  margin-top: 4px;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.minibox4 button{
+
+  height: 35px;
+  width: 120px;
+  margin-left: 5px;
+  padding: 10px;
+  border: none;
+  /* border-radius: 25px; */
+    color: rgba(0, 0, 0, 0.87);
+        font-size: 0.875rem;
+        /* background-color: rgba(0, 0, 0, 0.13);
+box-shadow:1px 1px 0px 0px rgba(0, 0, 0, 0.26); */
+border: none;
+background-color: rgba(0, 0, 0, 0.11);
+box-shadow:0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12); ;
+border-radius: 4px;
+cursor: pointer;
+
+}
+.minibox4 button:hover{
+transform: scale(1.03 ,1.03);
+
+}
+
+
+@media screen and (max-width: 501px) {
+  .nevbar{
+    display: flex;
+    flex-wrap: wrap;
+    height: 45vh;
+  }
+
+  .box{
+    width: 280px;
+  }
+}
