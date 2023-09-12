@@ -1,6 +1,6 @@
-# ERC20 Token Swap
+# Current Swap
 
-## Swap ERC20 tokens for CENT
+## Swap Current (CENT) tokens for USGold (USG)
 
 Commands to run
 
