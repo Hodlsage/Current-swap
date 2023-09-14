@@ -42,7 +42,7 @@ class ErrorBoundary extends Component {
                               <h2> Amount of Current per USG : 0.0 CENT </h2>
                          </div>
                          <div className="box">
-                              <h2> SUMOBOT (ERC20) </h2>
+                              <h2> Currentswap (CENT) </h2>
                               <div className="minibox1">
                                    <button>CENT</button>
                                    <input
