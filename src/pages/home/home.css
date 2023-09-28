@@ -1,0 +1,118 @@
+.main-section {
+    min-height: calc(100vh - 74px);
+    background:  center no-repeat, url("../../assets/img/currentbg.png") center / cover no-repeat;
+    width: 100%;
+}
+
+.home-section-card {
+    border-radius: 40px;
+    background: linear-gradient(116deg, var(--bs-black), rgba(255, 255, 255, 0.369) 22%);
+    height: 340px;
+}
+
+.home-mint-count-text {
+    margin-bottom: -5px;
+    color: var(--bs-yellow);
+
+}
+
+.home-mint-count-div {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.home-price-input {
+    width: 30%;
+    text-align: center;
+    border-radius: 12px;
+    border-width: 1px;
+    background: rgb(255, 255, 255);
+    color: var(--bs-black);
+
+}
+
+.home-price-div {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-top: 35px;
+}
+
+.home-price-total-label {
+    margin-top: 10px;
+    color: var(--bs-yellow);
+
+}
+
+.home-price-total-input {
+    width: 30%;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border-width: 1px;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    color: var(--bs-black);
+
+}
+
+.mr-0 {
+    margin-right: 0px !important;
+}
+
+.home-mint-button {
+    border-width: 0px;
+    border-color: var(--bs-black);
+    background: var(--bs-yellow);
+    color: var(--bs-black);
+}
+
+.text-center-with-padding-50 {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.home-mint-slogan {
+    margin-top: 20px;
+    color: var(--bs-yellow);
+
+}
+
+.home-gradient-card {
+    height: 340px;
+    border-radius: 40px;
+    background: linear-gradient(-135deg, var(--bs-black) 0%, rgba(255, 255, 255, 0.31) 30%);
+}
+
+.p-50-mt-50 {
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-top: 50px;
+}
+
+.home-earned {
+    font-size: 25px;
+    margin-bottom: 0px;
+    color: var(--bs-yellow);
+}
+
+.home-earned-value {
+    font-size: 20px;
+    margin-bottom: 12px;
+    margin-top: 0px;
+
+    color: var(--bs-yellow);
+}
+
+.home-claim-button {
+    background: var(--bs-yellow);
+    border-width: 0px;
+    color: var(--bs-black);
+}
+
+.home-marketing-banner {
+    margin-top: 20px;
+    color: var(--bs-yellow);
+
+}

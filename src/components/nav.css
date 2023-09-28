@@ -1,0 +1,34 @@
+.nav-header {
+    background: rgba(0, 0, 0);
+}
+
+.nav-background {
+    background: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.nav-banner {
+    background: rgb(0, 0, 0);
+    box-shadow: 0px 0px 12px var(--bs-black);
+}
+
+.nav-button {
+    background: rgba(0, 0, 0, 0);
+}
+
+.nav-tab {
+    margin-right: 18px;
+    color: var(--bs-yellow);
+}
+
+.connect-wallet {
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-radius: 12px;
+    color: var(--bs-black);
+    box-shadow: 0px 0px 12px var(--bs-black);
+}
+
+.color-orange {
+    color: var(--bs-yellow);
+}

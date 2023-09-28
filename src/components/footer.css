@@ -1,0 +1,8 @@
+.copyright-paragraph {
+    color: var(--bs-black);
+
+}
+
+.footer-min-height {
+    min-height: 100px;
+}
