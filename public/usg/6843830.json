@@ -1,10 +1,15 @@
 
 Content-Type: application/json
 
-
 {
+
     "name": "USGold Version 2",
     "description": " American Eagle one ounce gold coin.",
     "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
-        "attributes": [...]
+        "attributes": [
+          {
+            "trait_type": "gold"
+          }
+            
+          ]
 }
