@@ -8,7 +8,7 @@ Content-Type: application/json
     "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
         "attributes": [
           {
-            "trait_type": "coin type"
+            "trait_type": "coin type",
               "value": "gold eagle"
           }
             
