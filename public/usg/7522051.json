@@ -10,6 +10,10 @@ Content-Type: application/json
           {
             "trait_type": "coin type",
               "value": "gold eagle"
+          },
+          {
+            "trait_type": "coin weight",
+              "value": "1 ounce"
           }
             
           ],
