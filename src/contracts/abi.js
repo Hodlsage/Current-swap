@@ -166,7 +166,7 @@ export default [
 	},
 	{
 		"inputs": [],
-		"name": "current",
+		"name": "currentv2",
 		"outputs": [
 			{
 				"internalType": "address",
