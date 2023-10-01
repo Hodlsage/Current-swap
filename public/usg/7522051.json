@@ -1,18 +1,22 @@
-
 {
-
-    "name": "USGold Version 2",
-    "description": " American Eagle one ounce gold coin.",
-    "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
-        "attributes": [
-          {
-            "trait_type": "coin type",
-              "value": "gold eagle"
-          },
-          {
-            "trait_type": "coin weight",
-              "value": "1 ounce"
-          }
-            
-          ],
-}
+  "name": "Usgold Token #7522051",
+  "description": "USGold.com",
+  "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
+  "dna": "0",
+  "edition": 7522051,
+  "date": 010123,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "USGold Background"
+    },
+    {
+      "trait_type": "Mint Date",
+      "value": "010123"
+    },
+    {
+      "trait_type": "Coin Number",
+      "value": "4556255675"
+    }
+  ],
+  "compiler": "The Current Network"
