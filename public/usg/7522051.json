@@ -1,14 +1,14 @@
 {
-    "name": "Example NFT 001",
-    "creator": "Jane Doe, John Doe",
+    "name": "Coin 7522051",
+    "creator": "The Current Network",
     "creatorDID": "did:hedera:mainnet:7Prd74ry1Uct87nZqL3ny7aR7Cg46JamVbJgk8azVgUm;hedera:mainnet:fid=0.0.123",
-    "description": "This describes my NFT",
+    "description": "USGold Token backed by American Gold Eagle Coins",
     "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
     "checksum": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
     "type": "image/png",
     "format": "HIP412@2.0.0",
     "properties" : {
-        "external_url": "https://nft.com/mycollection/001"
+        "external_url": "https://currentnetwork-com.vercel.app/"
     },
     "files": [
         {
@@ -24,29 +24,23 @@
     ],
     "attributes": [
         {
-            "trait_type": "color",
-            "display_type": "color",
-            "value": "rgb(255,0,0)"
-        },
-        {
-            "trait_type": "hasPipe",
+            "trait_type": "coin type",
             "display_type": "boolean",
-            "value": true
+            "value": "American gold eagle"
         },
         {
-            "trait_type": "coolness",
-            "display_type": "boost",
-            "value": 10,
-            "max_value": 100
+            "trait_type": "coin weight",
+            "display_type": "boolean",
+            "value": "1 ounce"
         },
         {
-            "trait_type": "stamina",
-            "display_type": "percentage",
-            "value": 83
+            "trait_type": "Serial Number",
+            "display_type": "boolean",
+            "value": "458246-24rjt4406-3"
         }
         ,
         {
-            "trait_type": "birth",
+            "trait_type": "Mint Date",
             "display_type": "datetime",
             "value": 732844800
         }
