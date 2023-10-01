@@ -1,22 +1,23 @@
 {
-  "name": "Usgold Token #5219032",
-  "description": "USGold.com",
-  "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
-  "dna": "0",
-  "edition": 5219032,
-  "date": 010123,
-  "attributes": [
-    {
-      "trait_type": "Background",
-      "value": "USGold Background"
-    },
-    {
-      "trait_type": "Mint Date",
-      "value": "010123"
-    },
-    {
-      "trait_type": "Coin Number",
-      "value": "4556255675"
-    }
-  ],
-  "compiler": "The Current Network"
+    "name": "Example NFT",
+    "image": "ipfs://bafkreibwci24bt2xtqi23g35gfx63wj555u77lwl2t55ajbfjqomgefxce",
+    "type": "image/png",
+    "files": [
+            {
+                "uri": "ipfs://bawlkjaklfjoiaefklankfldanmfoieiajfl",
+                "type": "application/pdf",
+                "metadata": {
+                    "name": "Example second file",
+                    "description": "The description is recommended but optional. The image provided is an optional preview",
+                    "image": "ipfs://bawlkjaklfjoiaefklankflda1313ieiajfl",
+                    "type": "image/jpeg",
+                    "files": [
+                        {
+                            "uri": "ipfs://QmWS1VAdMD353A6SDk9wNyvkT14kyCiZrNDYAad4w1tKqT",
+                            "type": "application/vnd.ms-powerpoint"
+                        }
+                    ]
+                }
+            }
+        ]
+}
