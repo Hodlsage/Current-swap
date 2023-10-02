@@ -226,7 +226,7 @@ export const Home = () => {
                                 <div className="card-body"></div>
                                 <div className="row">
                                     <div className="col-xl-12 text-center-with-padding-50" style={{ marginBottom: "60px", marginTop: "0px" }}>
-                                        <h1 className="home-earned"> CurrentVault&trade;</h1>
+                                        <h1 className="home-earned"> CurrentRewards&trade;</h1>
                                   <br/>
                                         <h1 className='home-earned-value'>
                                             {mintReward} CRNT </h1>
