@@ -1,0 +1,26 @@
+.vault-metadata {
+    text-align: center;
+
+    color: var(--bs-yellow);
+    border-width: 0px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.441);
+    margin-top: 11px;
+}
+
+.vault-menulink {
+    text-align: left;
+    width: 250px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    background: rgba(255, 255, 255, 0.653);
+    border-width: 0px;
+    border-radius: 20px;
+}
+
+.vault-example {
+    color: var(--bs-black);
+    border-radius: 20px;
+    white-space: normal !important;
+}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './gallery.css';
+import './vault.css';
 import contractInstance from '../../contracts/lockInstance';
 import useWeb3 from "../../components/useWeb3";
 import axios from 'axios';
 import { Card } from './card';
 // Simple counter using React Hooks
-export const Gallery = () => {
+export const Vault = () => {
     const [count, setCount] = useState(0);
     const { web3, setWeb3, walletAddress, setWalletAddress } = useWeb3();
     const [metadataArray, setMetadataArray] = useState([]);

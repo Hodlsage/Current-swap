@@ -10,7 +10,7 @@ export const Footer = () => {
         <footer className="text-center footer-min-height footer" style={{ background: "white" }}>
             <div className="container text-muted py-lg-2 py-2">
                 <ul className="list-inline" style={{ marginTop: "0px" }}>
-                    <li className="list-inline-item me-4"><a href="https://currentswap.info/">
+                    <li className="list-inline-item me-4"><a href="https://currentnetwork-com.vercel.app/">
                         <img src={footer_image} style={{ width: "31px" }} alt="currentswap" /></a>
                     </li>
                     <li className="list-inline-item me-4">

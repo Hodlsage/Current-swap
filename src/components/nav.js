@@ -24,7 +24,7 @@ const getProviderOptions = () => { // const infuraId = "00ca1859789d4b40bce01f41
         coinbasewallet: {
             package: CoinbaseWalletSDK, // Required
             options: {
-                appName: "Red Giant Staking", // Required
+                appName: "Current Network", // Required
                 infuraId: "", // Required
                 rpc: "https://bsc-dataseed1.binance.org", // Optional if `infuraId` is provided; otherwise it's required
                 chainId: 56, // Optional. It defaults to 1 if not provided
@@ -188,7 +188,7 @@ export const Nav = () => {
 
     return (
         <header className="nav-header">
-            <nav className="navbar navbar-light navbar-expand-md py-3 nav-background">
+            <nav className="navbar navbar-dark navbar-expand-md py-3 nav-background">
                 <div className="container">
                     <Link className="navbar-brand d-flex align-items-center" to="/">
                     <img src="../img/currentforbg-sm.png" size="10" />
@@ -214,12 +214,12 @@ export const Nav = () => {
                         </ul>
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link to="/gallery"
+                                <Link to="/vault"
                                     className={
                                         `nav-link nav-tab ${
-                                            location.pathname === "/gallery" ? "active" : ""
+                                            location.pathname === "/vault" ? "active" : ""
                                         }`
-                                }>CurrentVault&trade;</Link>
+                                }>USGoldVault&trade;</Link>
                             </li>
                         </ul>
                         <br/>

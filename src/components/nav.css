@@ -1,9 +1,32 @@
+/* Set base font color to white */
+body {
+    color: rgb(0, 0, 0);
+}
+
+/* Change link color to yellow */
+.nav-tab,
+.nav-link {
+    color: var(--bs-yellow);
+}
+
+/* Change link color to yellow on hover */
+.nav-tab:hover,
+.nav-link:hover {
+    color: var(--bs-white);
+}
+
+/* Change link color to yellow when active */
+.nav-tab:active,
+.nav-link:active {
+    color: var(--bs-yellow);
+}
+
 .nav-header {
-    background: rgba(0, 0, 0);
+    background: rgb(255, 255, 255);
 }
 
 .nav-background {
-    background: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
     width: 100%;
 }
 
@@ -13,12 +36,7 @@
 }
 
 .nav-button {
-    background: rgba(0, 0, 0, 0);
-}
-
-.nav-tab {
-    margin-right: 18px;
-    color: var(--bs-yellow);
+    background: rgb(143, 142, 142);
 }
 
 .connect-wallet {
@@ -26,7 +44,6 @@
     border-width: 1px;
     border-radius: 12px;
     color: var(--bs-black);
-    box-shadow: 0px 0px 12px var(--bs-black);
 }
 
 .color-orange {
