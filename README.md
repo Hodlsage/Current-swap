@@ -7,12 +7,7 @@ Contracts:
 
 USGoldV2 -erc721 CurrentV3 -erc20 VaultV1 -ERC721/165
 
-npm start or yarn start
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
 
 
 <!-- PROJECT SHIELDS -->
@@ -91,13 +86,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 
 ### Built With
-
-* [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
