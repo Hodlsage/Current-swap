@@ -1,3 +1,13 @@
+
+Current Swap React APP 
+
+Contracts:
+
+USGoldV2 -erc721
+CurrentV3 -erc20
+VaultV1 -ERC721/165
+
+
 ### `npm start` or `yarn start`
 
 Runs the app in the development mode.\
