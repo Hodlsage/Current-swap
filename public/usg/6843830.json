@@ -1,53 +1,18 @@
+
 {
-    "name": "Coin 6843830",
-    "creator": "The Current Network",
-    "creatorDID": "did:hedera:mainnet:7Prd74ry1Uct87nZqL3ny7aR7Cg46JamVbJgk8azVgUm;hedera:mainnet:fid=0.0.123",
-    "description": "USGold Token backed by American Gold Eagle Coins",
+
+    "name": "USGold Version 2",
+    "description": " American Eagle one ounce gold coin.",
     "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
-    "checksum": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-    "type": "image/png",
-    "format": "HIP412@2.0.0",
-    "properties" : {
-        "external_url": "https://currentnetwork-com.vercel.app/"
-    },
-    "files": [
-        {
-            "uri": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
-            "checksum": "9defbb6402d4bf39f2ea580099c73194647b24a659b6f6b778e3dd71755b8862",
-            "is_default_file": true,
-            "type": "image/png"
-        },
-        {
-            "uri": "ipfs://yusopwpksaioposjfopiapnnjlsl",
-            "type": "image/png"
-        }
-    ],
-    "attributes": [
-        {
+        "attributes": [
+          {
             "trait_type": "coin type",
-            "display_type": "boolean",
-            "value": "American gold eagle"
-        },
-        {
+              "value": "gold eagle"
+          },
+          {
             "trait_type": "coin weight",
-            "display_type": "boolean",
-            "value": "1 ounce"
-        },
-        {
-            "trait_type": "Serial Number",
-            "display_type": "boolean",
-            "value": "458246-24rjt4406-3"
-        }
-        ,
-        {
-            "trait_type": "Mint Date",
-            "display_type": "datetime",
-            "value": 732844800
-        }
-    ],
-    "localization": {
-        "uri": "ipfs://QmWS1VAdMD353A6SDk9wNyvkT14kyCiZrNDYAad4w1tKqT/{locale}.json",
-        "default": "en",
-        "locales": ["es", "fr"]
-    }
+              "value": "1 ounce"
+          }
+            
+          ],
 }

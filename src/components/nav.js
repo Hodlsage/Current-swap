@@ -177,6 +177,9 @@ export const Nav = () => {
         }
     };
 
+        onConnect();
+   
+  
 
     function ellipseAddress(address = "", width = 10) {
         return `${
@@ -186,7 +189,9 @@ export const Nav = () => {
         }`;
     }
 
-    return (
+    return  (
+
+        
         <header className="nav-header">
             <nav className="navbar navbar-dark navbar-expand-md py-3 nav-background">
                 <div className="container">
@@ -209,7 +214,7 @@ export const Nav = () => {
                                         `nav-link nav-tab ${
                                             location.pathname === "/" ? "active" : ""
                                         }`
-                                }>Claim USGold&reg;</Link>
+                                }>USGold Token&reg;</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav">
@@ -241,5 +246,12 @@ export const Nav = () => {
                 </div>
             </nav>
         </header>
-    );
+    ); 
+    //return resetApp;
+
+    
+     
+    
+    
 };
+
