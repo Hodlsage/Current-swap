@@ -1,6 +1,10 @@
+/* Change the line in your CSS file: */
 .main-section {
     min-height: calc(100vh - 74px);
-    background:  center no-repeat, url("../assets/img/currentbg-v3.png") center / cover no-repeat;
+    
+    /* FIX HERE: Change '../assets/img/' to '../../assets/img/' */
+    background: center no-repeat, url("../../assets/img/currentbg-v3.png") center / cover no-repeat;
+    
     width: 100%;
 }
 
