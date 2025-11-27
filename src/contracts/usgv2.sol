@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// --- Name        : USGold V2 - [USG2]
+// --- Name        : Current Gold™ V2 - [USG2]
 // --- Symbol      : Format - {---}
 // --- Total supply: Generated from minter accounts
 // --- @Legal      : 

@@ -214,7 +214,7 @@ export const Nav = () => {
                                         `nav-link nav-tab ${
                                             location.pathname === "/" ? "active" : ""
                                         }`
-                                }>USGold Token&reg;</Link>
+                                }>Current Gold™ Token&reg;</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav">
@@ -224,7 +224,7 @@ export const Nav = () => {
                                         `nav-link nav-tab ${
                                             location.pathname === "/vault" ? "active" : ""
                                         }`
-                                }>USGoldVault&trade;</Link>
+                                }>Current Gold™Vault&trade;</Link>
                             </li>
                         </ul>
                         <br/>

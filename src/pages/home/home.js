@@ -202,7 +202,7 @@ export const Home = () => {
                                 <div className="card-body"></div>
                                 <div className="row">
                                     <div className="col-xl-12 home-price-div">
-                                    <p className="home-price-total-label">Enter the amount of USGold&reg; Tokens:</p>
+                                    <p className="home-price-total-label">Enter the amount of Current Gold™ Tokens:</p>
                                     <input type="number" className="home-price-input" value={count} onChange={(e) => setCount(e.target.value)} />
                                     </div>
                                     <div className="col-xl-12 home-price-div">
@@ -214,7 +214,7 @@ export const Home = () => {
                                         </button>
                                     </div>
                                     <div className="col-xl-12 text-center-with-padding-50">
-                                        <p className="home-mint-slogan">Claim your USGold&reg;</p>
+                                        <p className="home-mint-slogan">Claim your Current Gold™</p>
                                     </div>
                                 </div>
                             </div>

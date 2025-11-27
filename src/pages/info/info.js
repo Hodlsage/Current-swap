@@ -10,7 +10,7 @@ export const Info = () => {
                 <div className="col-xl-6 offset-xl-3 info-sub-div">
                     <div className="card info-card-bg">
                         <div className="card-body info-card-body">
-                            <h1 className='info-text'>A quick and easy way to exchange Current&trade; and USGold&reg;.</h1>
+                            <h1 className='info-text'>A quick and easy way to exchange Current&trade; and Current Gold™.</h1>
                             <p className='info-text'>Utilities
                             This allows conversions to Current for use on exchanges, and everyday use with your Current Gold Card. This also allows conversion to USG to redeem for the 1 oz. gold American Eagle coins.
                                 <br /><br /></p>

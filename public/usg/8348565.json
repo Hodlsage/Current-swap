@@ -1,18 +1,18 @@
 {
-    "name": "Coin 8348565",
+    "name": "Current Gold Coin No. 8348565",
     "creator": "The Current Network",
     "creatorDID": "did:hedera:mainnet:7Prd74ry1Uct87nZqL3ny7aR7Cg46JamVbJgk8azVgUm;hedera:mainnet:fid=0.0.123",
-    "description": "USGold Token backed by American Gold Eagle Coins",
-    "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
+    "description": "Current Gold™ Token backed by American Gold Eagle Coins",
+    "image": "https://currentnetwork.us/images/american-eagle-sm.jpg",
     "checksum": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
     "type": "image/png",
     "format": "HIP412@2.0.0",
     "properties" : {
-        "external_url": "https://currentnetwork-com.vercel.app/"
+        "external_url": "https://currentnetwork.us/"
     },
     "files": [
         {
-            "uri": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
+            "uri": "https://currentnetwork.us/images/american-eagle-sm.jpg",
             "checksum": "9defbb6402d4bf39f2ea580099c73194647b24a659b6f6b778e3dd71755b8862",
             "is_default_file": true,
             "type": "image/png"

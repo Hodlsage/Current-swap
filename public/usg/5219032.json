@@ -1,9 +1,9 @@
 
 {
 
-    "name": "USGold Version 2",
+    "name": "Current Gold™ Version 3.2",
     "description": " American Eagle one ounce gold coin.",
-    "image": "https://currentnetwork-com.vercel.app/images/american-eagle-sm.jpg",
+    "image": "https://currentnetwork.us/images/american-eagle-sm.jpg",
         "attributes": [
           {
             "trait_type": "coin type",
