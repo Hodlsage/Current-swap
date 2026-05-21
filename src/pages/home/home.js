@@ -198,7 +198,7 @@ export const Home = () => {
                 <div className="row mr-0">
                     <div className="col" style={{ paddingRight: "50px", paddingLeft: "50px", marginTop: "50px" }}>
                         <div>
-                            <div className="card home-section-card">
+                            <div className="card home-card">
                                 <div className="card-body"></div>
                                 <div className="row">
                                     <div className="col-xl-12 home-price-div">

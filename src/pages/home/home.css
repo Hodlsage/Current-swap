@@ -3,7 +3,7 @@
     min-height: calc(100vh - 74px);
     
     /* FIX HERE: Change '../assets/img/' to '../../assets/img/' */
-    background: center no-repeat, url("../../assets/img/currentbg-v3.png") center / cover no-repeat;
+    background: color(srgb rgb(219, 219, 219) rgb(255, 255, 255) rgb(255, 255, 255)) no-repeat, center / cover no-repeat;
     
     width: 100%;
 }
@@ -86,7 +86,7 @@
 .home-gradient-card {
     height: 340px;
     border-radius: 40px;
-    background: linear-gradient(-135deg, var(--bs-black) 0%, rgba(255, 255, 255, 0.31) 30%);
+    background: linear-gradient(-135deg, var(--bs-black) 0%, rgba(29, 24, 24, 0.139) 30%);
 }
 
 .p-50-mt-50 {
