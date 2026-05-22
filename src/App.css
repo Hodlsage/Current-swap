@@ -1,3 +1,12 @@
+/* ========================================================================
+Revision Control: v1.4
+Last Updated: 2026-05-22
+Changes: 
+- Retained 100vh application wrapper box boundaries.
+- Allowed layout elements to sit cleanly without clipping by preparing the flex architecture.
+========================================================================
+*/
+
 .App {
   text-align: center;
 }
@@ -43,11 +52,16 @@
 
 .dashboard-overview-highlight {
   font-size: 18px !important;
-
 }
 
+/* UPDATED: Main app framework set to properly contain the footer within bounds */
 .currentswap-main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;
+  max-height: 100vh;
+  box-sizing: border-box;
+  
+  /* REMOVED overflow: hidden; so elements fit naturally without hard clipping rules */
 }

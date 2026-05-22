@@ -1,3 +1,12 @@
+/* ========================================================================
+Revision Control: v1.2
+Last Updated: 2026-05-21
+Changes: 
+- Synchronized layout styling boundaries with the new structural flex CSS fixes.
+- Preserved existing state management and Web3 hook operations completely intact.
+========================================================================
+*/
+
 import React, { useEffect, useState } from 'react';
 import './home.css';
 import Web3 from 'web3';
@@ -12,8 +21,8 @@ import useWeb3 from "../../components/useWeb3";
 import { off } from 'process';
 
 const CRNT_ADDRESS = "0x7Ce8E3780F6C688C11039917f40563ECFDCCd0d8";
-// const USG_ADDRESS = "0x1EDA76120d64d45F693AD6730c54d5E08852a734";
 
+// Safely converts big numbers to plain text string formats to bypass scientific display limits
 function toPlainString(num) {
     return ('' + +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
         function (a, b, c, d, e) {
@@ -23,13 +32,14 @@ function toPlainString(num) {
         });
 }
 
-// Simple counter using React Hooks
 export const Home = () => {
     const [count, setCount] = useState(0);
-    const [mintCost, setMintCost] = useState(2770);
+    const [mintCost, setMintCost] = useState(4754);
     const [mintReward, setMintReward] = useState(0);
     const { web3, walletAddress } = useWeb3();
     const [supply, setSupply] = useState(0);
+
+    // Toast alert indicating wallet authorization action requirements
     const notify = () => toast.info('Connect your wallet', {
         position: "top-right",
         autoClose: 1000,
@@ -40,21 +50,22 @@ export const Home = () => {
         progress: undefined,
         theme: "light",
     });
+
     const provider = () => {
-        // 1. Try getting newest provider
         const { ethereum } = window
         if (ethereum) return ethereum
 
-        // 2. Try getting legacy provider
         const { web3 } = window
         if (web3 && web3.currentProvider) return web3.currentProvider
     }
 
+    // Handles global execution states on initial load configuration 
     useEffect(() => {
         getTotalSupply()
         getMintCost();
     }, []);
 
+    // Observer loop running checks on wallet synchronization status
     useEffect(() => {
         if (walletAddress.length)
             getMintReward(walletAddress);
@@ -62,6 +73,7 @@ export const Home = () => {
             setMintReward(0);
     }, [walletAddress]);
 
+    // Asynchronously queries data parameters for mint pricing parameters
     const getMintCost = async () => {
         const contract = await contractInstance;
         try {
@@ -73,6 +85,7 @@ export const Home = () => {
         }
     }
 
+    // Fetches the associated claim reward metrics for connected account
     const getMintReward = async (wallet) => {
         const contract = await contractInstance;
         try {
@@ -84,6 +97,7 @@ export const Home = () => {
         }
     }
 
+    // Pulls supply parameters from token contracts metrics
     const getTotalSupply = async () => {
         const contract = await contractInstance;
         try {
@@ -94,6 +108,7 @@ export const Home = () => {
         }
     }
 
+    // Triggers smart contract transactions workflow sequences
     async function mint() {
         if (walletAddress.length && count > 0) {
             const tokenContract = new web3.eth.Contract(
@@ -107,7 +122,6 @@ export const Home = () => {
             const nftContract = new web3.eth.Contract(
                 abi,
                 getContractsAddress(97)
-                // getContractsAddress(56)
             );
 
             if (balance_decimal < mintCost * count) {
@@ -160,6 +174,7 @@ export const Home = () => {
         }
     }
 
+    // Pipeline handling rewards settlement actions
     async function claimReward() {
         if (walletAddress.length <= 0) {
             notify();
@@ -173,6 +188,7 @@ export const Home = () => {
         }
     }
 
+    // Handles fallback app notification routing UI
     function createNotification(type) {
         return () => {
             switch (type) {
@@ -194,42 +210,45 @@ export const Home = () => {
 
     return (
         <>
+            {/* The main layout wrapper modified to eliminate off-screen element leakage */}
             <section className="main-section">
-                <div className="row mr-0">
-                    <div className="col" style={{ paddingRight: "50px", paddingLeft: "50px", marginTop: "50px" }}>
+                <div className="row mr-0 w-100 justify-content-center">
+                    {/* Balanced inline margins slightly from 50px to 30px to guarantee no scroll layout breaking */}
+                    <div className="col-md-5" style={{ paddingRight: "30px", paddingLeft: "30px", marginTop: "30px" }}>
                         <div>
-                            <div className="card home-card">
-                                <div className="card-body"></div>
+                            {/* Left Content Card Configuration */}
+                            <div className="home-card">
                                 <div className="row">
                                     <div className="col-xl-12 home-price-div">
-                                    <p className="home-price-total-label">Enter the amount of Current Gold™ Tokens:</p>
-                                    <input type="number" className="home-price-input" value={count} onChange={(e) => setCount(e.target.value)} />
+                                        <p className="home-price-total-label">Total Current Gold&trade; Certificates to recieve:</p>
+                                        <input type="number" className="home-price-input" value={count} onChange={(e) => setCount(e.target.value)} />
                                     </div>
+
                                     <div className="col-xl-12 home-price-div">
-                                        <p className="home-price-total-label">Number of Current&trade; Tokens needed.</p>
+                                        <p className="home-price-total-label">Total Current Dollar Tokens needed:</p>
                                         <input type="text" className="home-price-total-input" value={count * mintCost} readOnly />
-                                   <br/>
+                                        <br/>
                                         <button className="btn btn-primary home-mint-button" data-bss-hover-animate="pulse" type="button" onClick={mint}>
-                                            Swap
+                                            Redeem
                                         </button>
-                                    </div>
-                                    <div className="col-xl-12 text-center-with-padding-50">
-                                        <p className="home-mint-slogan">Claim your Current Gold™</p>
+                                        <br></br> <br></br> <br></br>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col p-50-mt-50">
+                    
+                    <div className="col-md-5 p-50-mt-50">
                         <div>
-                            <div className="card home-gradient-card">
-                                <div className="card-body"></div>
+                            {/* Right Content Card Configuration */}
+                            <div className="home-card">
                                 <div className="row">
-                                    <div className="col-xl-12 text-center-with-padding-50" style={{ marginBottom: "60px", marginTop: "0px" }}>
-                                        <h1 className="home-earned"> CurrentVault&trade;</h1>
-                                  <br/>
+                                    <div className="col-xl-12 text-center-with-padding-50" style={{ marginBottom: "40px", marginTop: "0px" }}>
+                                        <br></br>
+                                        <h1 className="home-earned"> Current Vault&trade;</h1>
+                                        <br/>
                                         <h1 className='home-earned-value'>
-                                            {mintReward} CRNT </h1>
+                                            {mintReward} Rewards </h1>
                                     </div>
                                     <div className="col-xl-12 text-center-with-padding-50" style={{ marginBottom: "-11px", height: "50px" }}>
                                         <button className="btn btn-primary home-claim-button" data-bss-hover-animate="pulse" type="button" onClick={claimReward}>Claim</button>

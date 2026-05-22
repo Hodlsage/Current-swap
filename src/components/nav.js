@@ -214,7 +214,17 @@ export const Nav = () => {
                                         `nav-link nav-tab ${
                                             location.pathname === "/" ? "active" : ""
                                         }`
-                                }>Current Gold™ Token&reg;</Link>
+                                }>Exchange</Link>
+                            </li>
+                        </ul>
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link to="/info"
+                                    className={
+                                        `nav-link nav-tab ${
+                                            location.pathname === "/info" ? "active" : ""
+                                        }`
+                                }>Account</Link>
                             </li>
                         </ul>
                         <ul className="navbar-nav">
@@ -224,7 +234,7 @@ export const Nav = () => {
                                         `nav-link nav-tab ${
                                             location.pathname === "/vault" ? "active" : ""
                                         }`
-                                }>Current Gold™Vault&trade;</Link>
+                                }>Vault</Link>
                             </li>
                         </ul>
                         <br/>
@@ -233,13 +243,17 @@ export const Nav = () => {
                                 walletAddress === "" ? onConnect : resetApp
                         }>
                             {
-                            walletAddress === "" ? "Connect Wallet" : ellipseAddress(walletAddress)
-                        }</button>
+                                walletAddress === "" ? onConnect : "✅Connected"
+                        }
+                        </button>
+                        
                         {
                         walletAddress !== "" && (
                             <button className="connect-wallet" data-bss-hover-animate="pulse" type="button"
-                                onClick={onDisconnect}>
-                                Disconnect Wallet
+                                onClick={
+                                walletAddress === "" ? onDisconnect : resetApp
+                        }>
+                                Disconnect
                             </button>
                         )
                     } </div>
