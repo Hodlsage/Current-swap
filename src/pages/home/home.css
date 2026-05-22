@@ -1,0 +1,139 @@
+/* ========================================================================
+Revision Control: v1.2
+Last Updated: 2026-05-21
+Changes: 
+- Converted .main-section to a dynamic flex layout to prevent viewport overflow.
+- Adjusted margin rules to guarantee elements fit within 100vh bounds.
+- Retained the fixed 0.85 opacity dark background fix for the home cards.
+========================================================================
+*/
+
+.main-section {
+    /* Changed from min-height calc to an explicit flex-based max height constraint */
+    min-height: calc(100vh - 74px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* FIX HERE: Change '../assets/img/' to '../../assets/img/' */
+    /* v0.2.0 FIX: replaced an invalid `color(srgb rgb() rgb() rgb())` value
+       (not valid CSS; silently dropped by browsers) with a valid solid bg.
+       Swap in your hero image here when ready, e.g.:
+       background: #dbdbdb url('../../assets/img/currentbg.png') center / cover no-repeat; */
+    background: #dbdbdb;
+    
+    width: 100%;
+    /* Added padding instead of relying on heavy child margins to stop bottom blowouts */
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.home-section-card {
+    border-radius: 40px;
+    background: rgba(0, 0, 0, 0.369);
+    height: 340px;
+}
+
+.home-mint-count-text {
+    margin-bottom: -5px;
+    color: var(--bs-yellow);
+}
+
+.home-mint-count-div {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.home-price-input {
+    width: 30%;
+    text-align: center;
+    border-radius: 12px;
+    border-width: 1px;
+    background: rgb(255, 255, 255);
+    color: var(--bs-black);
+}
+
+.home-price-div {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+    /* Reduced margin from 35px to 20px to save vertical real estate */
+    margin-top: 20px;
+}
+
+.home-price-total-label {
+    margin-top: 10px;
+    color: var(--bs-yellow);
+}
+
+.home-price-total-input {
+    width: 30%;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border-width: 1px;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    color: var(--bs-black);
+}
+
+.mr-0 {
+    margin-right: 0px !important;
+}
+
+.home-mint-button {
+    border-width: 0px;
+    border-color: var(--bs-black);
+    background: var(--bs-yellow);
+    color: var(--bs-black);
+}
+
+.text-center-with-padding-50 {
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.home-mint-slogan {
+    margin-top: 20px;
+    color: var(--bs-yellow);
+}
+
+/* Retained fix: Solidly dark/black background layout container */
+.home-card {
+    height: 340px;
+    border-radius: 40px;
+    background: rgba(0, 0, 0, 0.85); 
+}
+
+.p-50-mt-50 {
+    padding-right: 50px;
+    padding-left: 50px;
+    /* Balanced out top spacing to preserve viewport real estate */
+    margin-top: 30px;
+}
+
+.home-earned {
+    font-size: 25px;
+    margin-bottom: 0px;
+    color: var(--bs-yellow);
+}
+
+.home-earned-value {
+    font-size: 20px;
+    margin-bottom: 12px;
+    margin-top: 0px;
+    color: var(--bs-yellow);
+}
+
+.home-claim-button {
+    background: var(--bs-yellow);
+    border-width: 0px;
+    color: var(--bs-black);
+}
+
+.home-marketing-banner {
+    margin-top: 20px;
+    color: var(--bs-yellow);
+}

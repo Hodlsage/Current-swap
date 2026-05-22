@@ -1,0 +1,167 @@
+/* ============================================================================
+ * FILE: src/theme.css
+ * PURPOSE: Cohesive design system for Current Network (black / white / gold).
+ * ----------------------------------------------------------------------------
+ * REVISION CONTROL
+ *   v0.2.0  2026-05-22  Cleanup pass 2 — created.
+ *     - Establishes one source of truth for colors, spacing, the gold accent,
+ *       and the global "yellow highlight on every button" requirement.
+ *     - Fixes the layout-height/needless-scroll problem with a flex app shell.
+ * ==========================================================================*/
+
+:root {
+    --cur-black: #0d0d0d;
+    --cur-panel: #161616;
+    --cur-panel-2: #1e1e1e;
+    --cur-gold: #f5c518;        /* primary gold accent */
+    --cur-gold-soft: #d8ad12;
+    --cur-white: #ffffff;
+    --cur-muted: #b9b9b9;
+    --cur-line: rgba(245, 197, 24, 0.18);
+    --cur-radius: 16px;
+    --cur-radius-sm: 10px;
+    --nav-height: 72px;
+}
+
+/* ---- App shell: fixes the too-tall / needless-scroll issue --------------- */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+}
+body {
+    background: var(--cur-black);
+    color: var(--cur-white);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.currentswap-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* main content grows to fill, footer sticks to bottom, no phantom scroll */
+.currentswap-main > .page-area,
+.currentswap-main > section {
+    flex: 1 0 auto;
+}
+
+/* ---- Reusable panel/card ------------------------------------------------- */
+.cur-card {
+    background: var(--cur-panel);
+    border: 1px solid var(--cur-line);
+    border-radius: var(--cur-radius);
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+.cur-card h2 { color: var(--cur-gold); margin-top: 0; }
+
+/* ---- THE global yellow-highlight button (requirement #7) ----------------- */
+.cur-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--cur-gold);
+    border: 1.5px solid var(--cur-gold);
+    border-radius: var(--cur-radius-sm);
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease, box-shadow .18s ease, transform .05s ease;
+}
+.cur-btn:hover {
+    background: var(--cur-gold);
+    color: var(--cur-black);
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.25);   /* yellow highlight */
+}
+.cur-btn:active { transform: translateY(1px); }
+.cur-btn:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; background: transparent; color: var(--cur-muted); border-color: var(--cur-muted); }
+.cur-btn--solid { background: var(--cur-gold); color: var(--cur-black); }
+.cur-btn--solid:hover { box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.35); }
+
+/* Apply the yellow highlight to legacy bootstrap buttons too, so the whole
+   system is consistent without rewriting every old class. */
+.btn:hover,
+.connect-wallet:hover,
+.home-mint-button:hover,
+.home-claim-button:hover {
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.3) !important;
+}
+
+/* ---- Stat / data tiles (dashboard fluff) -------------------------------- */
+.cur-stat {
+    background: var(--cur-panel-2);
+    border: 1px solid var(--cur-line);
+    border-radius: var(--cur-radius-sm);
+    padding: 16px 18px;
+}
+.cur-stat .label { color: var(--cur-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+.cur-stat .value { color: var(--cur-white); font-size: 1.35rem; font-weight: 700; margin-top: 4px; }
+.cur-stat .value.gold { color: var(--cur-gold); }
+
+.cur-badge-ok {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(40, 167, 69, 0.12);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: .9rem;
+}
+
+/* ---- Wallet pill in nav (small round icon + disconnect) ----------------- */
+.cur-wallet { display: inline-flex; align-items: center; gap: 10px; }
+.cur-wallet__icon {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--cur-gold), var(--cur-gold-soft));
+    border: 2px solid var(--cur-white);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--cur-black); font-weight: 800; font-size: .85rem;
+}
+.cur-wallet__addr { color: var(--cur-white); font-size: .85rem; }
+
+/* ---- Page container ------------------------------------------------------ */
+.cur-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 36px 20px 48px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.cur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* ---- Swap box (Vault page FROM/TO) -------------------------------------- */
+.swap-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--cur-panel-2);
+    border: 1px solid var(--cur-line);
+    border-radius: var(--cur-radius-sm);
+    padding: 16px;
+}
+.swap-row input {
+    flex: 1; background: transparent; border: none; color: var(--cur-white);
+    font-size: 1.4rem; outline: none; min-width: 0;
+}
+.swap-token { color: var(--cur-gold); font-weight: 700; white-space: nowrap; }
+.swap-flip {
+    align-self: center; margin: 6px 0;
+    background: var(--cur-gold); color: var(--cur-black);
+    border: none; border-radius: 50%; width: 40px; height: 40px;
+    font-size: 1.1rem; cursor: pointer;
+}
+.swap-flip:hover { box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.35); }
+
+/* ---- Redeem form inputs -------------------------------------------------- */
+.redeem-input {
+    width: 100%;
+    background: var(--cur-panel-2);
+    border: 1px solid var(--cur-line);
+    border-radius: var(--cur-radius-sm);
+    color: var(--cur-white);
+    padding: 12px 14px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+}
+.redeem-input:focus { border-color: var(--cur-gold); box-shadow: 0 0 0 3px rgba(245,197,24,0.18); }
