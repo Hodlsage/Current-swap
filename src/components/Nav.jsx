@@ -17,11 +17,19 @@
  *           Root cause not yet isolated. Card page/route still exist
  *           (src/pages/card/Card.jsx, App.jsx route) but are unlinked from
  *           nav until the Firefox issue is debugged separately.
+ *   v1.3.0  2026-06-12  Firefox issue persisted even after the v1.2.0 revert
+ *           (3-tab nav also affected on live Vercel deploy) \u2014 narrowed to
+ *           RainbowKit's default <ConnectButton />, whose `mounted` +
+ *           connectionStatus gate can leave it permanently
+ *           opacity:0/pointer-events:none in some states. Replaced with
+ *           WalletButton (src/components/WalletButton.jsx), a
+ *           <ConnectButton.Custom> implementation styled with .cur-btn that
+ *           always renders a visible, clickable element.
  * ==========================================================================*/
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { WalletButton } from './WalletButton';
 
 export function Nav() {
     const { pathname } = useLocation();
@@ -44,15 +52,7 @@ export function Nav() {
                     {tab('/vault', 'Vault')}
                 </nav>
 
-                {/* RainbowKit account control: compact avatar + address + the
-                    built-in account modal that includes Disconnect.
-                    chainStatus="none": wagmiConfig is single-chain (see
-                    config/wagmi.js), so no network pill/switcher is shown. */}
-                <ConnectButton
-                    accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }}
-                    chainStatus="none"
-                    showBalance={false}
-                />
+                <WalletButton />
             </div>
         </header>
     );
