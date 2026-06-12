@@ -139,13 +139,6 @@ export function Vault() {
                             1 CRNT = $1 USD
                         </div>
                     </div>
-                    <div className="cur-stat">
-                        <div className="label">Total Custody Value</div>
-                        <div className="value gold">{totalCustodyValueCRNT.toLocaleString()} CRNT</div>
-                        <div style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 4 }}>
-                            {certificatesInCustody.toLocaleString()} &times; {eaglePrice.toLocaleString()} = {totalCustodyValueCRNT.toLocaleString()}
-                        </div>
-                    </div>
                     {reserveBalanceCRNT !== null && (
                         <div className="cur-stat">
                             <div className="label">CRNT Reserve (Vault)</div>
@@ -155,6 +148,15 @@ export function Vault() {
                             </div>
                         </div>
                     )}
+                </div>
+
+                {/* Total Custody Value: full-width row, below the other stats */}
+                <div className="cur-stat" style={{ marginTop: 18 }}>
+                    <div className="label">Total Custody Value</div>
+                    <div className="value gold">{totalCustodyValueCRNT.toLocaleString()} CRNT</div>
+                    <div style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 4 }}>
+                        {certificatesInCustody.toLocaleString()} &times; {eaglePrice.toLocaleString()} = {totalCustodyValueCRNT.toLocaleString()}
+                    </div>
                 </div>
 
                 {v1CertificatesAvailable ? (

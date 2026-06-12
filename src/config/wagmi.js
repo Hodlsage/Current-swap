@@ -98,14 +98,14 @@ export const wagmiConfig = getDefaultConfig({
 export const ADDRESSES = {
     // Polygon Amoy testnet (80002)
     [polygonAmoy.id]: {
-        CRNT_ADDRESS: '0xf0be42E76cF1Eb63fD65b76516cCecE09760d90e',     // TODO: paste the deployed Current.sol address (Amoy)
+        CRNT_ADDRESS: '',     // TODO: paste the deployed Current.sol address (Amoy)
         USGOLD_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: 'https://amoy.polygonscan.com',
     },
     // Polygon mainnet (137)
     [polygon.id]: {
-        CRNT_ADDRESS: '',     // TODO: paste the deployed Current.sol address (mainnet)
+        CRNT_ADDRESS: '0xf0be42E76cF1Eb63fD65b76516cCecE09760d90e',
         USGOLD_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: 'https://polygonscan.com',

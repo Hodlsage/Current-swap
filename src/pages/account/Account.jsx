@@ -55,9 +55,6 @@ export function Account() {
 
     const usgoldUnits = Number(toDisplayAmount(usgoldCount));
     const usgoldValueCRNT = usgoldUnits * eaglePrice;
-    const totalValueCRNT = Number(currentBalance) + usgoldValueCRNT;
-    const totalValueUSD = (totalValueCRNT * USD_PER_CRNT)
-        .toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
     const onTarget = chainId === TARGET_CHAIN.id;
     const networkName = onTarget ? TARGET_CHAIN.name : `Unrecognized (chain ${chainId})`;
@@ -207,13 +204,6 @@ export function Account() {
                 <div className="cur-stat">
                     <div className="label">USGold Value (at {eaglePrice.toLocaleString()} CRNT each)</div>
                     <div className="value gold">{usgoldValueCRNT.toLocaleString()} CRNT</div>
-                </div>
-                <div className="cur-stat">
-                    <div className="label">Total Portfolio Value</div>
-                    <div className="value gold">{totalValueUSD}</div>
-                    <div style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 4 }}>
-                        CRNT balance + USGold value, at the current Eagle price
-                    </div>
                 </div>
             </div>
 
