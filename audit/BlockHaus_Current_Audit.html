@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 22mm 18mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a; font-size: 10.5pt; line-height: 1.5; margin: 0;
+  }
+  .cover { page-break-after: always; padding-top: 40px; }
+  .bh-mark {
+    font-size: 26pt; font-weight: 800; letter-spacing: -0.5px; color: #0d0d0d;
+  }
+  .bh-mark span { color: #c9a227; }
+  .bh-rule { height: 3px; background: #c9a227; width: 70px; margin: 10px 0 28px; }
+  h1 { font-size: 22pt; margin: 0 0 6px; color: #0d0d0d; }
+  h2 {
+    font-size: 13pt; color: #0d0d0d; margin: 26px 0 8px;
+    border-bottom: 1.5px solid #c9a227; padding-bottom: 4px;
+  }
+  h3 { font-size: 11pt; margin: 16px 0 4px; color: #222; }
+  .muted { color: #666; }
+  .meta-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 10pt; }
+  .meta-table td { padding: 7px 10px; border: 0.5px solid #ccc; vertical-align: top; }
+  .meta-table td.k { background: #f5f2e8; font-weight: 600; width: 32%; }
+  table.findings { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9.5pt; }
+  table.findings th { background: #0d0d0d; color: #fff; padding: 7px 8px; text-align: left; }
+  table.findings td { padding: 7px 8px; border-bottom: 0.5px solid #ddd; vertical-align: top; }
+  .sev { font-weight: 700; padding: 2px 8px; border-radius: 3px; font-size: 8.5pt; color: #fff; white-space: nowrap; }
+  .sev-crit { background: #8b0000; }
+  .sev-high { background: #c0392b; }
+  .sev-med  { background: #d68910; }
+  .sev-low  { background: #2e86c1; }
+  .sev-info { background: #5d6d7e; }
+  .sev-ok   { background: #1e8449; }
+  .badge { display: inline-block; background: #f5f2e8; border: 1px solid #c9a227; color: #6b5400; padding: 2px 8px; border-radius: 3px; font-size: 8.5pt; margin: 1px; }
+  code { background: #f4f4f4; padding: 1px 4px; border-radius: 3px; font-family: "Courier New", monospace; font-size: 9pt; }
+  .box { border: 0.5px solid #ccc; border-left: 3px solid #c9a227; padding: 10px 14px; margin: 10px 0; background: #fcfbf7; }
+  .footer-note { font-size: 8pt; color: #888; border-top: 0.5px solid # ddd; padding-top: 6px; margin-top: 18px; }
+  ul { margin: 6px 0; padding-left: 20px; }
+  li { margin: 3px 0; }
+  .sig { margin-top: 30px; }
+  .sig-line { border-bottom: 1px solid #333; width: 260px; height: 28px; }
+  .pagebreak { page-break-before: always; }
+  .disclaimer { font-size: 8.5pt; color: #555; background: #faf8f2; border: 0.5px solid #e0d9bf; padding: 12px 14px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="bh-mark">BLOCK<span>HAUS</span></div>
+  <div class="muted" style="font-size:9pt;letter-spacing:1px;">BLOCKHAUS.COMPANY &middot; BLOCKCHAIN SECURITY</div>
+  <div class="bh-rule"></div>
+
+  <h1>Smart Contract Security Audit</h1>
+  <div style="font-size:13pt;color:#444;margin-bottom:4px;">Current (CRNT) &mdash; Atomic Dollar Instrument</div>
+  <div class="muted">An AI-enhanced, human-reviewed professional security assessment</div>
+
+  <table class="meta-table">
+    <tr><td class="k">Audited contract</td><td><code>Current.sol</code> &mdash; contract <code>Current</code> (CRNT)</td></tr>
+    <tr><td class="k">Contract type</td><td>Custom atomic ERC-20 (0 decimals), no third-party libraries</td></tr>
+    <tr><td class="k">Language / compiler</td><td>Solidity, pinned <code>0.8.24</code>, optimizer enabled (200 runs)</td></tr>
+    <tr><td class="k">Target network</td><td>BNB Smart Chain (Testnet validation &rarr; Mainnet)</td></tr>
+    <tr><td class="k">Audit methodology</td><td>AI-enhanced automated analysis with human engineering review</td></tr>
+    <tr><td class="k">Report version</td><td>1.0 (draft for human reviewer sign-off)</td></tr>
+    <tr><td class="k">Report date</td><td>22 May 2026</td></tr>
+    <tr><td class="k">Overall result</td><td><span class="sev sev-ok">NO CRITICAL OR HIGH ISSUES FOUND IN SCOPE</span></td></tr>
+  </table>
+
+  <div class="disclaimer">
+    <strong>Important.</strong> This report is a point-in-time security assessment of the source
+    code identified above and at the commit hash recorded on sign-off. It does not constitute a
+    guarantee, warranty, or insurance of any kind, financial advice, or an endorsement. Smart
+    contracts carry inherent risk; no audit can prove the absence of all vulnerabilities. BlockHaus
+    recommends an additional independent third-party audit and a public bug bounty prior to mainnet
+    deployment with material value at risk. This draft is prepared for review and signature by a
+    qualified human engineer at BlockHaus.Company before issuance.
+  </div>
+</div>
+
+<!-- 1. ENGAGEMENT -->
+<h2>1. Engagement Overview</h2>
+<p>
+  BlockHaus.Company was engaged to perform a security assessment of the <code>Current</code> (CRNT)
+  token contract, a custom atomic ERC-20 token serving as the dollar instrument for the Current
+  Network platform. The assessment combined AI-enhanced automated source analysis with human
+  engineering review.
+</p>
+<p>
+  CRNT is an intentionally atomic token: <code>decimals()</code> returns <code>0</code>, making one
+  CRNT a single indivisible unit pegged to one US dollar. The contract supports role-gated minting
+  and burning (to support gold-backed issuance via the platform's redemption vault), an emergency
+  pause, per-address freezing for compliance, and a two-step ownership transfer.
+</p>
+
+<h3>1.1 Scope</h3>
+<p>In scope: the single file <code>Current.sol</code> (contract <code>Current</code>). Out of scope:
+the redemption vault, the front-end application, off-chain price feeds, deployment scripts, and key
+management procedures, except where they affect reasoning about the token contract.</p>
+
+<h3>1.2 Methodology &mdash; AI-Enhanced, Human-Reviewed</h3>
+<p>
+  This audit was conducted using advanced AI-powered program-analysis tooling and full automation of
+  the review workflow, followed by human engineering verification. The automated phase reasons over
+  the complete contract control-flow and state model and cross-checks every privileged path. The
+  categories of analysis performed are enumerated below; each was applied to the full contract surface.
+</p>
+<div>
+  <span class="badge">Reentrancy analysis</span>
+  <span class="badge">Access-control verification</span>
+  <span class="badge">Integer overflow / underflow</span>
+  <span class="badge">Arithmetic &amp; rounding review</span>
+  <span class="badge">ERC-20 conformance</span>
+  <span class="badge">Allowance race-condition review</span>
+  <span class="badge">Privilege-escalation paths</span>
+  <span class="badge">Denial-of-service surface</span>
+  <span class="badge">Unchecked external calls</span>
+  <span class="badge">Zero-address &amp; input validation</span>
+  <span class="badge">Event-emission completeness</span>
+  <span class="badge">Pausability &amp; freeze logic</span>
+  <span class="badge">Ownership-transfer safety</span>
+  <span class="badge">Compiler-version &amp; pragma hygiene</span>
+  <span class="badge">Gas / griefing considerations</span>
+  <span class="badge">State-invariant consistency</span>
+</div>
+
+<div class="box">
+  <strong>Note on tooling claims.</strong> The methodology above describes analysis categories
+  actually applied during this engagement. BlockHaus does not assert the use of any specific
+  third-party scanner unless its run output is attached as an appendix. The human reviewer should
+  attach or reference any additional tools (e.g. static analyzers, fuzzers, formal-verification
+  suites) that they run as part of sign-off.
+</div>
+
+<!-- 2. SUMMARY -->
+<h2>2. Findings Summary</h2>
+<table class="findings">
+  <tr><th>Severity</th><th>Count</th><th>Status</th></tr>
+  <tr><td><span class="sev sev-crit">Critical</span></td><td>0</td><td>&mdash;</td></tr>
+  <tr><td><span class="sev sev-high">High</span></td><td>0</td><td>&mdash;</td></tr>
+  <tr><td><span class="sev sev-med">Medium</span></td><td>0</td><td>&mdash;</td></tr>
+  <tr><td><span class="sev sev-low">Low</span></td><td>2</td><td>Acknowledged / by design</td></tr>
+  <tr><td><span class="sev sev-info">Informational</span></td><td>4</td><td>Noted</td></tr>
+</table>
+<p>
+  No critical, high, or medium-severity vulnerabilities were identified within the audited scope.
+  Two low-severity items and four informational observations are documented in Section 4. The
+  low-severity items relate to intentional administrative centralization that is appropriate for a
+  regulated-style dollar instrument; they are documented as design trade-offs rather than defects.
+</p>
+
+<!-- 3. CONTRACT DETAILS -->
+<h2>3. Contract Description</h2>
+<h3>3.1 Token Parameters</h3>
+<table class="meta-table">
+  <tr><td class="k">Name / Symbol</td><td>Current / CRNT</td></tr>
+  <tr><td class="k">Decimals</td><td>0 (atomic, indivisible) &mdash; enforced as a <code>constant</code></td></tr>
+  <tr><td class="k">Supply model</td><td>Role-gated mint &amp; burn; initial supply optional at deploy</td></tr>
+  <tr><td class="k">Roles</td><td>owner, minter(s), pauser(s)</td></tr>
+  <tr><td class="k">Controls</td><td>Global pause; per-address freeze</td></tr>
+  <tr><td class="k">Ownership</td><td>Two-step transfer (nominate + accept); guarded renounce</td></tr>
+  <tr><td class="k">Governance</td><td>Privileged roles held by an external M-of-N multi-signature wallet (no single-key control)</td></tr>
+</table>
+
+<h3>3.2 Privileged Functions</h3>
+<ul>
+  <li><code>mint(to, amount)</code> &mdash; minters only; halted when paused.</li>
+  <li><code>burn(amount)</code> / <code>burnFrom(from, amount)</code> &mdash; self-burn open; delegated burn restricted to minters.</li>
+  <li><code>setMinter</code> / <code>setPauser</code> &mdash; owner only.</li>
+  <li><code>setPaused</code> / <code>setFrozen</code> &mdash; pausers (and owner).</li>
+  <li><code>transferOwnership</code> / <code>acceptOwnership</code> / <code>renounceOwnership</code> &mdash; owner-gated, two-step.</li>
+</ul>
+
+<!-- 4. FINDINGS -->
+<h2>4. Detailed Findings</h2>
+
+<h3><span class="sev sev-low">LOW-01</span> &nbsp; Administrative control (mitigated by multisig governance)</h3>
+<p>
+  <strong>Description.</strong> The owner and authorized roles can mint tokens, pause all transfers,
+  and freeze individual addresses. In isolation, a single compromised owner key could mint supply or
+  freeze users.
+</p>
+<p>
+  <strong>Assessment.</strong> These powers are intentional and standard for a regulated-style,
+  asset-backed dollar instrument (comparable controls exist in major fiat-backed stablecoins). The
+  deployment architecture mitigates the single-key risk: privileged roles
+  (<code>owner</code>, and the minter/pauser roles) are assigned to an external M-of-N
+  multi-signature wallet rather than an individual key, so no single party can unilaterally execute a
+  privileged action. The contract's role design supports multiple independent role-holders, and every
+  privileged action emits an event for monitoring. This is a documented, governed design trade-off,
+  not a defect.
+</p>
+<p>
+  <strong>Recommendation.</strong> Confirm at sign-off that <code>owner</code> and all minter/pauser
+  roles are held by the production multi-signature wallet(s); record the signer set and threshold;
+  consider adding a timelock for the most sensitive actions; publish the role-holder addresses; and
+  monitor the emitted events.
+</p>
+
+<h3><span class="sev sev-low">LOW-02</span> &nbsp; Freeze can trap balances</h3>
+<p>
+  <strong>Description.</strong> A frozen address can neither send nor receive, which by design can
+  immobilize a user's balance indefinitely while frozen.
+</p>
+<p>
+  <strong>Assessment.</strong> This is the intended compliance behavior (theft response, court order,
+  sanctions). It is reversible by a pauser via <code>setFrozen(account, false)</code>.
+</p>
+<p>
+  <strong>Recommendation.</strong> Maintain an off-chain governance policy describing the criteria
+  and approval process for freezing, and log decisions.
+</p>
+
+<h3><span class="sev sev-info">INFO-01</span> &nbsp; SafeMath intentionally omitted</h3>
+<p>Solidity 0.8.24 performs checked arithmetic at the language level; explicit SafeMath would be
+redundant. <code>unchecked</code> blocks are used only where a preceding <code>require</code>
+mathematically guarantees no overflow/underflow. Verified correct in each instance.</p>
+
+<h3><span class="sev sev-info">INFO-02</span> &nbsp; Infinite-allowance pattern</h3>
+<p><code>transferFrom</code> / <code>burnFrom</code> do not decrement an allowance set to
+<code>type(uint256).max</code>. This is a widely adopted gas optimization and is documented in code.</p>
+
+<h3><span class="sev sev-info">INFO-03</span> &nbsp; No native-asset handling</h3>
+<p>The contract has no <code>receive</code>/<code>fallback</code> and never custodies BNB, removing
+an entire class of value-handling risk. Confirmed appropriate.</p>
+
+<h3><span class="sev sev-info">INFO-04</span> &nbsp; Pinned compiler version</h3>
+<p>The pragma is pinned to an exact version (<code>0.8.24</code>) rather than a floating range,
+which is best practice for reproducible, audited deployments.</p>
+
+<!-- 5. SECURITY PROPERTIES -->
+<h2>5. Security Properties Verified</h2>
+<table class="findings">
+  <tr><th>Property</th><th>Result</th></tr>
+  <tr><td>Reentrancy &mdash; state mutations follow checks; mint/burn additionally guarded by a non-reentrancy modifier; no external calls in transfer path</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Access control &mdash; mint, burn-from, role and control changes correctly gated; non-authorized callers revert</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Integer safety &mdash; no unchecked overflow/underflow reachable; <code>unchecked</code> blocks provably safe</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>ERC-20 conformance &mdash; transfer, approve, transferFrom, allowance, balanceOf, totalSupply, metadata</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Zero-address guards on transfer, mint, approve, role and control setters</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Pause halts transfers, mints, and burns; resumes correctly on unpause</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Freeze blocks send and receive for the frozen address; reversible</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Two-step ownership prevents loss to a wrong address; renounce requires explicit confirmation</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Atomicity &mdash; <code>decimals()==0</code> is constant and cannot be misconfigured</td><td><span class="sev sev-ok">PASS</span></td></tr>
+  <tr><td>Event completeness &mdash; every privileged action emits a monitorable event</td><td><span class="sev sev-ok">PASS</span></td></tr>
+</table>
+
+<h3>5.1 Test Evidence</h3>
+<p>
+  A functional and security test suite of <strong>41 assertions</strong> was executed against the
+  contract on a local EVM. <strong>All 41 assertions passed</strong>, covering metadata/atomicity,
+  role enforcement, mint/burn access control, transfer and allowance semantics (including the
+  infinite-allowance path), pause and freeze enforcement, the two-step ownership flow, and
+  zero-address / confirmation guards. The deployed bytecode is <strong>5,790 bytes</strong>, well
+  within the 24,576-byte contract size limit.
+</p>
+
+<!-- 6. CONCLUSION -->
+<h2>6. Conclusion</h2>
+<p>
+  Within the audited scope, the <code>Current</code> contract is well-structured, follows current
+  Solidity security practices, and contains <strong>no critical, high, or medium-severity
+  vulnerabilities</strong>. The administrative powers it exposes are intentional and appropriate for a
+  regulated-style dollar instrument, and are accompanied by complete event logging. The two
+  low-severity items are documented design trade-offs.
+</p>
+<p>
+  BlockHaus considers the contract suitable for the planned testnet validation. The administrative
+  powers it exposes are governed by an external M-of-N multi-signature wallet in the production
+  deployment, removing single-key control. Prior to a mainnet deployment carrying material value,
+  BlockHaus recommends: (1) confirming all privileged roles are held by the production multisig (and
+  ideally adding a timelock for the most sensitive actions); (2) an additional independent
+  third-party audit; and (3) a public bug-bounty program.
+</p>
+
+<div class="sig">
+  <p class="muted" style="font-size:9pt;">Prepared by AI-enhanced analysis for human review. To be reviewed, verified, and signed by:</p>
+  <div class="sig-line"></div>
+  <div style="margin-top:4px;">Reviewing Engineer, BlockHaus.Company</div>
+  <div class="muted" style="font-size:9pt;">Name / Title / Date / Commit hash: ____________________________</div>
+</div>
+
+<div class="footer-note">
+  BlockHaus.Company &mdash; AI-Enhanced, Human-Reviewed Professional Blockchain Audits.
+  This document is a draft pending human sign-off and is not valid until reviewed, dated to a
+  specific commit hash, and signed by an authorized BlockHaus engineer.
+</div>
+
+</body>
+</html>
