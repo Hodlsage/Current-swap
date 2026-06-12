@@ -45,7 +45,7 @@ import { http } from 'wagmi';
 //   'polygon' -> Polygon mainnet (137)
 //   'local'   -> local Hardhat sandbox (31337), dev-only
 // ---------------------------------------------------------------------------
-export const ACTIVE_NETWORK = 'amoy';
+export const ACTIVE_NETWORK = 'polygon';
 
 // A WalletConnect projectId is required by RainbowKit's default config, but only
 // actually used for the WalletConnect option. "demo" lets MetaMask/injected work
@@ -98,7 +98,7 @@ export const wagmiConfig = getDefaultConfig({
 export const ADDRESSES = {
     // Polygon Amoy testnet (80002)
     [polygonAmoy.id]: {
-        CRNT_ADDRESS: '',     // TODO: paste the deployed Current.sol address (Amoy)
+        CRNT_ADDRESS: '0xf0be42E76cF1Eb63fD65b76516cCecE09760d90e',     // TODO: paste the deployed Current.sol address (Amoy)
         USGOLD_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: 'https://amoy.polygonscan.com',
