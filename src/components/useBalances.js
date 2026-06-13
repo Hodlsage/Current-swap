@@ -43,6 +43,10 @@ export function useBalances() {
         currentBalance: crnt.data !== undefined ? toDisplayAmount(crnt.data) : '0',
         usgoldCount: usgold.data !== undefined ? toDisplayAmount(usgold.data) : '0',
         loading: crnt.isLoading || usgold.isLoading,
+        // Surfaced so the UI can distinguish "really zero" from "read
+        // failed" (e.g. RPC outage) rather than silently showing 0 in both
+        // cases.
+        error: crnt.error || usgold.error || null,
         refresh: () => { crnt.refetch(); usgold.refetch(); },
     };
 }

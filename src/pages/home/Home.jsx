@@ -18,7 +18,7 @@ import { walletShortName, walletDisplayAddress } from '../../utils/identity';
 export function Home() {
     const { address } = useAccount();
     const chainId = useChainId();
-    const { currentBalance, usgoldCount } = useBalances();
+    const { currentBalance, usgoldCount, error: balanceError } = useBalances();
     const { memberSince, isNewMember } = useMemberSince(address);
 
     // Record the login time once per session (when this page first mounts
@@ -58,6 +58,16 @@ export function Home() {
                     <p style={{ color: '#ff6b6b', margin: 0 }}>
                         You are connected to chain {chainId}. Please switch to {TARGET_CHAIN.name}{' '}
                         ({TARGET_CHAIN.id}) using your wallet to view live balances.
+                    </p>
+                </div>
+            )}
+
+            {onTarget && balanceError && (
+                <div className="cur-card" style={{ marginBottom: 22, borderColor: 'rgba(255,107,107,0.5)' }}>
+                    <p style={{ color: '#ff6b6b', margin: 0 }}>
+                        Could not read your balance from the network right now (the figures below
+                        may show 0 even if you hold tokens). This is usually a temporary RPC
+                        issue &mdash; try refreshing in a moment.
                     </p>
                 </div>
             )}

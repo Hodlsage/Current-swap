@@ -37,7 +37,7 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { polygonAmoy, polygon } from 'wagmi/chains';
 import { defineChain } from 'viem';
-import { http } from 'wagmi';
+import { http, fallback } from 'wagmi';
 
 // ---------------------------------------------------------------------------
 // ACTIVE NETWORK — the ONE switch that controls everything below.
@@ -71,7 +71,16 @@ const CHAIN_BY_NETWORK = {
 
 const TRANSPORT_BY_NETWORK = {
     amoy: http('https://rpc-amoy.polygon.technology'),
-    polygon: http('https://polygon-rpc.com'),
+    // Polygon mainnet: polygon-rpc.com alone has been unreliable for
+    // unauthenticated reads (rate limits / possible deprecation of public
+    // access). Fall back across several independent public endpoints so a
+    // single provider outage doesn't silently zero out balances.
+    polygon: fallback([
+        http('https://polygon-rpc.com'),
+        http('https://polygon.llamarpc.com'),
+        http('https://1rpc.io/matic'),
+        http('https://polygon-bor-rpc.publicnode.com'),
+    ]),
     local: http('http://127.0.0.1:8545'),
 };
 

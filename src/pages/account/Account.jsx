@@ -35,7 +35,7 @@ import { walletShortName, walletDisplayAddress } from '../../utils/identity';
 export function Account() {
     const { address } = useAccount();
     const chainId = useChainId();
-    const { currentBalance, usgoldCount, loading, refresh } = useBalances();
+    const { currentBalance, usgoldCount, loading, refresh, error: balanceError } = useBalances();
     const { memberSince, isNewMember } = useMemberSince(address);
     const { VAULT_ADDRESS, EXPLORER } = getAddressesForChain(chainId);
 
@@ -69,13 +69,23 @@ export function Account() {
     return (
         <div className="cur-page">
 
+            {balanceError && (
+                <div className="cur-card" style={{ marginBottom: 22, borderColor: 'rgba(255,107,107,0.5)' }}>
+                    <p style={{ color: '#ff6b6b', margin: 0 }}>
+                        Could not read your balance from the network right now (the figures below
+                        may show 0 even if you hold tokens). This is usually a temporary RPC
+                        issue &mdash; try the Refresh button below in a moment.
+                    </p>
+                </div>
+            )}
+
             {/* ====================================================================
               * FRIENDLY SUMMARY — plain-English, leads the page.
               * ==================================================================*/}
             <div className="cur-card" style={{ marginBottom: 22 }}>
                 <h2 style={{ marginTop: 0 }}>Your Balance</h2>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', margin: '8px 0 4px' }}>
-                    <span style={{ fontSize: '2.6rem', fontWeight: 800, color: 'var(--cur-gold)' }}>
+                    <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--cur-gold)' }}>
                         {balanceUSD}
                     </span>
                     <span style={{ color: 'var(--cur-muted)', fontSize: '1.05rem' }}>
