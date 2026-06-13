@@ -19,7 +19,7 @@
  *       balance is the number that matters for migration planning.
  *     - This is a SEPARATE chain (Ethereum mainnet) from the rest of the app
  *       (Polygon, see config/wagmi.js). A dedicated read-only viem client is
- *       used here \u2014 this does NOT add Ethereum to wagmiConfig / the wallet
+ *       used here — this does NOT add Ethereum to wagmiConfig / the wallet
  *       connection, which remains single-chain Polygon per config/wagmi.js.
  * ----------------------------------------------------------------------------
  * NETWORK NOTE
@@ -38,7 +38,7 @@ import { mainnet } from 'viem/chains';
 export const V1_USGOLD_ADDRESS = '0x4000369AcfA25C8FE5d17fE3312e30C332beF633';
 // 9 decimals, confirmed via public token tracker (NOT atomic / 0-decimal).
 export const V1_USGOLD_DECIMALS = 9;
-// The "old vault" wallet \u2014 consolidated balance of V1 USGold holders.
+// The "old vault" wallet — consolidated balance of V1 USGold holders.
 export const V1_OLD_VAULT_WALLET = '0x08d43cc89A420C7E40c98a8BBb8096828C16Ab85';
 
 const V1_ABI = [

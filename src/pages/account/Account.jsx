@@ -19,7 +19,16 @@
  *           who want them, but are no longer the first thing shown.
  *           NOTE: USGold remains the name of the gold-backing token for now
  *           (it backs CRNT). A future "Current Gold Cert" / NFT-based v2 of
- *           the gold side is a separate, later effort — not reflected here.
+ *           the gold side is a separate, later effort -- not reflected here.
+ *   v1.3.0  2026-06-12  Removed the "Total Portfolio Value" stat box (CRNT +
+ *           USGold combined total) per request -- the per-asset figures
+ *           (CRNT held / USD value, USGold held / USGold value) remain.
+ *           "Your Balance" hero figure resized from an oversized 2.6rem
+ *           display down to 1.35rem, matching the .cur-stat value size used
+ *           everywhere else on the page.
+ *   v1.4.0  2026-06-12  Added a red banner (shown when useBalances() reports
+ *           a read error) distinguishing "balance read failed" from "balance
+ *           is genuinely 0" -- see useBalances.js v1.2.0.
  * ==========================================================================*/
 
 import React from 'react';
@@ -39,7 +48,10 @@ export function Account() {
     const { memberSince, isNewMember } = useMemberSince(address);
     const { VAULT_ADDRESS, EXPLORER } = getAddressesForChain(chainId);
 
-    const usd = (Number(currentBalance) * USD_PER_CRNT)
+    // balanceUSD: CRNT balance expressed in USD (1:1 peg). Used both in the
+    // "Your Balance" hero and the detailed holdings grid below -- a single
+    // calculation, shown in two places.
+    const balanceUSD = (Number(currentBalance) * USD_PER_CRNT)
         .toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
     // Eagle price: live from Vault if deployed, else legacy reference figure.
@@ -62,9 +74,6 @@ export function Account() {
     const memberSinceStr = memberSince
         ? memberSince.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })
         : '—';
-
-    const balanceUSD = (Number(currentBalance) * USD_PER_CRNT)
-        .toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
     return (
         <div className="cur-page">
@@ -205,7 +214,7 @@ export function Account() {
                 </div>
                 <div className="cur-stat">
                     <div className="label">Value in USD (1 CRNT = $1)</div>
-                    <div className="value">{usd}</div>
+                    <div className="value">{balanceUSD}</div>
                 </div>
                 <div className="cur-stat">
                     <div className="label">USGold Certificates</div>

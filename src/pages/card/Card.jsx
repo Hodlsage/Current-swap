@@ -10,7 +10,7 @@
  *     - Demo: a static set of preset "load" amounts ($100 / $500 / $1,000).
  *       Selecting one shows the user's CRNT balance decreasing by that
  *       amount and a mock Visa-style card balance increasing by the same
- *       amount. Purely illustrative \u2014 no balances are actually changed
+ *       amount. Purely illustrative — no balances are actually changed
  *       on-chain; useBalances() is read-only and unaffected.
  * ==========================================================================*/
 

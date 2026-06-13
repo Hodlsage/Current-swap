@@ -5,6 +5,12 @@
  * REVISION CONTROL
  *   v1.0.0  2026-05-22  Cleanup pass 3 — ported to wagmi hooks. Only reachable
  *           when connected (App.jsx gate), so this always has an address.
+ *   v1.1.0  2026-06-12  "Network" stat: when connected to an unexpected
+ *           chain, show "Unrecognized (chain X)" instead of pairing
+ *           TARGET_CHAIN's name with the wrong chainId.
+ *   v1.2.0  2026-06-12  Added a red banner (shown when useBalances() reports
+ *           a read error) distinguishing "balance read failed" from "balance
+ *           is genuinely 0" -- see useBalances.js v1.2.0.
  * ==========================================================================*/
 
 import React, { useState } from 'react';

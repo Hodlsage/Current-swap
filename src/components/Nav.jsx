@@ -1,7 +1,8 @@
 /* ============================================================================
  * FILE: src/components/Nav.jsx
- * PURPOSE: Top navigation. Menu (Redeem/Account/Vault) + RainbowKit account
- *          control (the small wallet pill + disconnect lives inside it).
+ * PURPOSE: Top navigation. Menu (Redeem/Account/Vault) + WalletButton (custom
+ *          connect/account control, replacing RainbowKit's default
+ *          ConnectButton — see WalletButton.jsx).
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-05-22  Cleanup pass 3
@@ -18,7 +19,7 @@
  *           (src/pages/card/Card.jsx, App.jsx route) but are unlinked from
  *           nav until the Firefox issue is debugged separately.
  *   v1.3.0  2026-06-12  Firefox issue persisted even after the v1.2.0 revert
- *           (3-tab nav also affected on live Vercel deploy) \u2014 narrowed to
+ *           (3-tab nav also affected on live Vercel deploy) — narrowed to
  *           RainbowKit's default <ConnectButton />, whose `mounted` +
  *           connectionStatus gate can leave it permanently
  *           opacity:0/pointer-events:none in some states. Replaced with

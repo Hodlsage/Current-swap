@@ -10,6 +10,9 @@
  *           getAddressesForChain (supports local Hardhat sandbox + Amoy).
  *           USGold balance read is skipped when no USGold address is set for
  *           the active chain (not deployed in this round).
+ *   v1.2.0  2026-06-12  Returns `error` (first of crnt/usgold read errors, or
+ *           null) so the UI can distinguish "RPC read failed" from "balance
+ *           is genuinely 0" instead of treating both the same.
  * ==========================================================================*/
 
 import { useAccount, useChainId, useReadContract } from 'wagmi';

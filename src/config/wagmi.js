@@ -11,10 +11,20 @@
  *           local Hardhat sandbox chain (31337) for offline dev/testing.
  *   v3.0.0  2026-06-12  SINGLE-CHAIN CONFIG. Removed the network switcher:
  *           wagmiConfig now exposes exactly ONE chain, controlled by the
- *           ACTIVE_NETWORK flag below ('amoy' | 'polygon'). RainbowKit's
- *           ConnectButton no longer shows "Wrong network" / a chain dropdown
- *           because there is nothing to switch to — the wallet is prompted to
- *           switch to (or add) the single configured chain on connect.
+ *           ACTIVE_NETWORK flag below ('amoy' | 'polygon'). The wallet is
+ *           prompted to switch to (or add) the single configured chain on
+ *           connect. (Note: the UI's wallet button, src/components/
+ *           WalletButton.jsx, DOES show a "Wrong network" state if the
+ *           connected chainId doesn't match TARGET_CHAIN.id — this is
+ *           intentional, see that file's changelog.)
+ *   v4.0.0  2026-06-12  ACTIVATED MAINNET: ACTIVE_NETWORK = 'polygon',
+ *           CRNT_ADDRESS for [polygon.id] set to the deployed Current.sol
+ *           contract (0xf0be42E76cF1Eb63fD65b76516cCecE09760d90e).
+ *           Polygon mainnet transport switched from a single RPC
+ *           (polygon-rpc.com, which appears to now require sign-in for
+ *           public access) to a fallback([...]) chain across several
+ *           independent public RPCs, so a single provider outage doesn't
+ *           silently zero out balances.
  * ----------------------------------------------------------------------------
  * HOW TO SWITCH BETWEEN TESTNET AND MAINNET
  *   Change ACTIVE_NETWORK below to 'amoy' (Polygon Amoy testnet, 80002) or

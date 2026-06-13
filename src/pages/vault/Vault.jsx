@@ -15,13 +15,17 @@
  *   v2.0.0  2026-06-12  "Certificates in Custody" now reads the LIVE balance
  *           of the legacy USGold V1 "old vault" wallet
  *           (0x08d43cc89A420C7E40c98a8BBb8096828C16Ab85) on Ethereum mainnet
- *           via useV1VaultBalance \u2014 this represents existing V1 holder
+ *           via useV1VaultBalance — this represents existing V1 holder
  *           volume that the new system accounts for. Deliberately
  *           balanceOf(old vault wallet), NOT totalSupply() (V1 was
  *           over-minted relative to backing; totalSupply() would overstate
  *           this figure). Falls back to the static LEGACY_VAULT_REFERENCE
  *           figure if the mainnet read is unavailable (e.g. this sandbox,
  *           which cannot reach external RPCs).
+ *   v2.1.0  2026-06-12  Layout: "Total Custody Value" moved out of the
+ *           cur-grid into its own full-width row below the other custody
+ *           stats (Certificates in Custody / Eagle Price / CRNT Reserve),
+ *           per request.
  * ==========================================================================*/
 
 import React, { useState } from 'react';
