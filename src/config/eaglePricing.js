@@ -9,6 +9,8 @@
  *           placeholders with a formula derived from the US Mint's official
  *           2026 Pricing Grid (Federal Register notice 2026-03952,
  *           https://www.usmint.gov/content/dam/usmint/shop/Pricing-Grid.pdf).
+ *   v1.1.0  2026-07-02  Updated CURRENT_GOLD_SPOT_USD to current spot price 
+ *           ($4,076) and CURRENT_GOLD_SPOT_AS_OF to 2026-07-02.
  * ----------------------------------------------------------------------------
  * HOW THE US MINT ACTUALLY PRICES THIS (READ THIS FIRST)
  *   - The Mint publishes a "Pricing Grid": for each $50 band of LBMA gold
@@ -72,11 +74,12 @@ export function goldSpotToEaglePrice(goldSpotUsd) {
 // ---------------------------------------------------------------------------
 // SNAPSHOT INPUT — update this periodically (manual until an oracle feed is
 // wired up per the production path above). Source: LBMA gold spot, sampled
-// 2026-06-12 (~$4,566/oz).
+// 2026-07-02 (~$4,076/oz).
 // ---------------------------------------------------------------------------
-export const CURRENT_GOLD_SPOT_USD = 4566;
-export const CURRENT_GOLD_SPOT_AS_OF = '2026-06-12';
+// UPDATE: Setting the spot price to the current 2026-07-02 real-world value
+export const CURRENT_GOLD_SPOT_USD = 4076;
+export const CURRENT_GOLD_SPOT_AS_OF = '2026-07-02';
 
 // Derived Eagle price in whole CRNT (1 CRNT = $1 USD, atomic token).
-// $4,566 -> band $4,550 -> + $870 premium = $5,420.
+// UPDATE: The new math is now $4,076 -> band $4,050 -> + $870 premium = $4,920.
 export const EAGLE_PRICE_CRNT = goldSpotToEaglePrice(CURRENT_GOLD_SPOT_USD);
