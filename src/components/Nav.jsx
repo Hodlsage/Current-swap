@@ -1,7 +1,7 @@
 /* ============================================================================
  * FILE: src/components/Nav.jsx
- * PURPOSE: Top navigation. Menu (Redeem/Account/Vault) + WalletButton (custom
- *          connect/account control, replacing RainbowKit's default
+ * PURPOSE: Top navigation. Menu (Redeem/Account/Vault/Card) + WalletButton
+ *          (custom connect/account control, replacing RainbowKit's default
  *          ConnectButton — see WalletButton.jsx).
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
@@ -30,16 +30,35 @@
  *           4th tab itself, but v1.3.0 shows the real cause was RainbowKit's
  *           default ConnectButton, already fixed independently. Card
  *           page/route were never removed, only unlinked -- safe to restore.
+ *   v1.5.0  2026-09-23  Real mobile nav added -- previously this was a plain
+ *           always-visible horizontal row with zero responsive behavior
+ *           (theme.css had no @media rules at all), so on a phone it either
+ *           overflowed or crushed together. Added a hamburger toggle that
+ *           only appears below the mobile breakpoint (see theme.css); the
+ *           links render in a slide-down panel when open, and auto-close on
+ *           navigation so the menu doesn't stay open after picking a page.
  * ==========================================================================*/
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { WalletButton } from './WalletButton';
 
 export function Nav() {
     const { pathname } = useLocation();
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    // Auto-close the mobile menu whenever the route changes (picking a link
+    // should close it, not leave it hanging open over the new page).
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [pathname]);
+
     const tab = (to, label) => (
-        <Link to={to} className={`cur-navlink ${pathname === to ? 'active' : ''}`}>
+        <Link
+            to={to}
+            className={`cur-navlink ${pathname === to ? 'active' : ''}`}
+            onClick={() => setMenuOpen(false)}
+        >
             {label}
         </Link>
     );
@@ -51,14 +70,27 @@ export function Nav() {
                     CURRENT<span>NETWORK</span>
                 </Link>
 
-                <nav className="cur-nav__links">
+                <nav className={`cur-nav__links ${menuOpen ? 'is-open' : ''}`}>
                     {tab('/redeem', 'Redeem')}
                     {tab('/account', 'Account')}
                     {tab('/vault', 'Vault')}
                     {tab('/card', 'Card')}
                 </nav>
 
-                <WalletButton />
+                <div className="cur-nav__actions">
+                    <WalletButton />
+                    <button
+                        type="button"
+                        className={`cur-nav__burger ${menuOpen ? 'is-open' : ''}`}
+                        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                        aria-expanded={menuOpen}
+                        onClick={() => setMenuOpen((open) => !open)}
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+                </div>
             </div>
         </header>
     );
