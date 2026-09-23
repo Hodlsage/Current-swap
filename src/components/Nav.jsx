@@ -26,6 +26,10 @@
  *           WalletButton (src/components/WalletButton.jsx), a
  *           <ConnectButton.Custom> implementation styled with .cur-btn that
  *           always renders a visible, clickable element.
+ *   v1.4.0  2026-09-23  Relinked "Card" tab. The v1.2.0 revert blamed the
+ *           4th tab itself, but v1.3.0 shows the real cause was RainbowKit's
+ *           default ConnectButton, already fixed independently. Card
+ *           page/route were never removed, only unlinked -- safe to restore.
  * ==========================================================================*/
 
 import React from 'react';
@@ -51,6 +55,7 @@ export function Nav() {
                     {tab('/redeem', 'Redeem')}
                     {tab('/account', 'Account')}
                     {tab('/vault', 'Vault')}
+                    {tab('/card', 'Card')}
                 </nav>
 
                 <WalletButton />

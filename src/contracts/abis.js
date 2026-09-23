@@ -11,12 +11,6 @@
  *           isPauser -- these exist on Current.sol but were never added to
  *           the ABI, so nothing in the UI could read them. Added for the
  *           new Token Info panel (components/TokenInfo.jsx).
- *   v1.3.0  2026-09-23  Renamed USGOLD_ABI -> CGC_ABI (Current Gold Cert).
- *           Product rebrand: USGold/USG -> Current Gold/CGC everywhere
- *           user-facing. The historical V1 legacy contract (a separate,
- *           already-deployed contract on Ethereum mainnet) keeps its real
- *           technical name in comments where that fact matters -- see
- *           useV1VaultBalance.js.
  * ==========================================================================*/
 
 // Current (CRNT) — atomic ERC-20 (decimals = 0).
@@ -54,9 +48,8 @@ export const CRNT_ABI = [
       outputs: [{ type: 'bool' }] },
 ];
 
-// Current Gold Cert (CGC) — ERC-721 (balance + ownership reads). Formerly
-// branded "USGold"; renamed 2026-09-23 to match the current product name.
-export const CGC_ABI = [
+// USGold — ERC-721 (balance + ownership reads).
+export const USGOLD_ABI = [
     { type: 'function', name: 'balanceOf', stateMutability: 'view',
       inputs: [{ name: 'owner', type: 'address' }], outputs: [{ type: 'uint256' }] },
     { type: 'function', name: 'setApprovalForAll', stateMutability: 'nonpayable',
@@ -64,8 +57,7 @@ export const CGC_ABI = [
       outputs: [] },
 ];
 
-// Current Gold Vault (CGC Vault) — the Phase-1 atomic redemption vault
-// (subset for the UI). Formerly branded "USGoldVault".
+// USGoldVault — the Phase-1 atomic redemption vault (subset for the UI).
 export const VAULT_ABI = [
     { type: 'function', name: 'eaglePriceCRNT', stateMutability: 'view',
       inputs: [], outputs: [{ type: 'uint256' }] },

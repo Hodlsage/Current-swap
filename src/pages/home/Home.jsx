@@ -29,7 +29,7 @@ import { walletShortName, walletDisplayAddress } from '../../utils/identity';
 export function Home() {
     const { address } = useAccount();
     const chainId = useChainId();
-    const { currentBalance, cgcCount, error: balanceError } = useBalances();
+    const { currentBalance, usgoldCount, error: balanceError } = useBalances();
     const { memberSince, isNewMember } = useMemberSince(address);
 
     // Record the login time once per session (when this page first mounts
@@ -111,8 +111,8 @@ export function Home() {
                     <div className="value">{usdValue}</div>
                 </div>
                 <div className="cur-stat">
-                    <div className="label">Current Gold Certificates</div>
-                    <div className="value gold">{toDisplayAmount(cgcCount)}</div>
+                    <div className="label">USGold Certificates</div>
+                    <div className="value gold">{toDisplayAmount(usgoldCount)}</div>
                 </div>
                 <div className="cur-stat">
                     <div className="label">Access Level</div>
