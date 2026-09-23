@@ -118,21 +118,21 @@ export const ADDRESSES = {
     // Polygon Amoy testnet (80002)
     [polygonAmoy.id]: {
         CRNT_ADDRESS: '',     // TODO: paste the deployed Current.sol address (Amoy)
-        USGOLD_ADDRESS: '',   // not deployed in this round
+        CGC_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: 'https://amoy.polygonscan.com',
     },
     // Polygon mainnet (137)
     [polygon.id]: {
         CRNT_ADDRESS: '0xf0be42E76cF1Eb63fD65b76516cCecE09760d90e',
-        USGOLD_ADDRESS: '',   // not deployed in this round
+        CGC_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: 'https://polygonscan.com',
     },
     // Local Hardhat sandbox (31337), dev-only
     [hardhatLocal.id]: {
         CRNT_ADDRESS: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-        USGOLD_ADDRESS: '',   // not deployed in this round
+        CGC_ADDRESS: '',   // not deployed in this round
         VAULT_ADDRESS: '',
         EXPLORER: '',
     },
@@ -146,7 +146,7 @@ export function getAddressesForChain(chainId) {
 // *connected* chain's addresses should call getAddressesForChain with
 // useChainId() instead (kept in sync since there's only one chain anyway).
 export const CRNT_ADDRESS = ADDRESSES[TARGET_CHAIN_ID].CRNT_ADDRESS;
-export const USGOLD_ADDRESS = ADDRESSES[TARGET_CHAIN_ID].USGOLD_ADDRESS;
+export const CGC_ADDRESS = ADDRESSES[TARGET_CHAIN_ID].CGC_ADDRESS;
 export const VAULT_ADDRESS = ADDRESSES[TARGET_CHAIN_ID].VAULT_ADDRESS;
 export const USD_PER_CRNT = 1;     // Current is pegged 1:1 USD by definition
 export const EXPLORER = ADDRESSES[TARGET_CHAIN_ID].EXPLORER;

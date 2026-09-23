@@ -1,6 +1,6 @@
 /* ============================================================================
  * FILE: src/pages/account/Account.jsx
- * PAGE: Account — friendly balance summary + CRNT/USGold holdings + account
+ * PAGE: Account — friendly balance summary + CRNT/Current Gold holdings + account
  *       profile detail (wagmi).
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
@@ -11,24 +11,28 @@
  *           - "Member since" date, from useMemberSince (first-ever login,
  *             see that file's header for the localStorage caveat).
  *           - Full wallet address, network, and a combined portfolio total
- *             (CRNT value + USGold value at current Eagle price) added.
+ *             (CRNT value + Current Gold value at current Eagle price) added.
  *   v1.2.0  2026-06-12  Added a friendly, non-technical summary section at the
  *           top of the page ("Your Balance" / plain-English explanation of
- *           CRNT and USGold) aimed at early adopters who aren't crypto-native.
+ *           CRNT and Current Gold) aimed at early adopters who aren't crypto-native.
  *           The existing wallet/network/profile details remain below for users
  *           who want them, but are no longer the first thing shown.
- *           NOTE: USGold remains the name of the gold-backing token for now
- *           (it backs CRNT). A future "Current Gold Cert" / NFT-based v2 of
- *           the gold side is a separate, later effort -- not reflected here.
+ *           NOTE: this v1.2.0 note originally deferred the USGold -> Current
+ *           Gold Cert (CGC) rename to a "later effort" -- that rename has now
+ *           happened (see v1.5.0 below); this note is kept for history.
  *   v1.3.0  2026-06-12  Removed the "Total Portfolio Value" stat box (CRNT +
- *           USGold combined total) per request -- the per-asset figures
- *           (CRNT held / USD value, USGold held / USGold value) remain.
+ *           Current Gold combined total) per request -- the per-asset figures
+ *           (CRNT held / USD value, Current Gold held / Current Gold value)
+ *           remain.
  *           "Your Balance" hero figure resized from an oversized 2.6rem
  *           display down to 1.35rem, matching the .cur-stat value size used
  *           everywhere else on the page.
  *   v1.4.0  2026-06-12  Added a red banner (shown when useBalances() reports
  *           a read error) distinguishing "balance read failed" from "balance
  *           is genuinely 0" -- see useBalances.js v1.2.0.
+ *   v1.5.0  2026-09-23  Rebrand: USGold/USG -> Current Gold/CGC everywhere
+ *           on this page (variable names, labels, body copy). See
+ *           useBalances.js v1.3.0 for the underlying hook rename.
  * ==========================================================================*/
 
 import React from 'react';
@@ -44,7 +48,7 @@ import { walletShortName, walletDisplayAddress } from '../../utils/identity';
 export function Account() {
     const { address } = useAccount();
     const chainId = useChainId();
-    const { currentBalance, usgoldCount, loading, refresh, error: balanceError } = useBalances();
+    const { currentBalance, cgcCount, loading, refresh, error: balanceError } = useBalances();
     const { memberSince, isNewMember } = useMemberSince(address);
     const { VAULT_ADDRESS, EXPLORER } = getAddressesForChain(chainId);
 
@@ -65,8 +69,8 @@ export function Account() {
         ? Number(priceRead.data)
         : LEGACY_VAULT_REFERENCE.eaglePriceCRNT;
 
-    const usgoldUnits = Number(toDisplayAmount(usgoldCount));
-    const usgoldValueCRNT = usgoldUnits * eaglePrice;
+    const cgcUnits = Number(toDisplayAmount(cgcCount));
+    const cgcValueCRNT = cgcUnits * eaglePrice;
 
     const onTarget = chainId === TARGET_CHAIN.id;
     const networkName = onTarget ? TARGET_CHAIN.name : `Unrecognized (chain ${chainId})`;
@@ -101,26 +105,26 @@ export function Account() {
                         ({toDisplayAmount(currentBalance)} CRNT)
                     </span>
                 </div>
-                <p style={{ color: 'var(--cur-muted)', marginBottom: usgoldUnits > 0 ? 16 : 0 }}>
+                <p style={{ color: 'var(--cur-muted)', marginBottom: cgcUnits > 0 ? 16 : 0 }}>
                     Every CRNT in your account is worth exactly <strong style={{ color: 'var(--cur-white)' }}>$1</strong>.
                     There are no hidden fees or fluctuating exchange rates &mdash; what you see
                     is what it's worth, today and any day.
                 </p>
 
-                {usgoldUnits > 0 && (
+                {cgcUnits > 0 && (
                     <div style={{
                         background: 'var(--cur-panel-2)', border: '1px solid var(--cur-line)',
                         borderRadius: 'var(--cur-radius-sm)', padding: '14px 16px', marginTop: 6,
                     }}>
                         <p style={{ margin: 0, color: 'var(--cur-white)' }}>
-                            You also hold <strong style={{ color: 'var(--cur-gold)' }}>{usgoldUnits} USGold certificate{usgoldUnits === 1 ? '' : 's'}</strong> &mdash;{' '}
+                            You also hold <strong style={{ color: 'var(--cur-gold)' }}>{cgcUnits} Current Gold certificate{cgcUnits === 1 ? '' : 's'}</strong> &mdash;{' '}
                             each one represents a real, physical 1&nbsp;oz American Gold
                             Eagle coin, held safely in a vault on your behalf.
                         </p>
                         <p style={{ margin: '8px 0 0', color: 'var(--cur-muted)' }}>
                             Right now those certificates are worth about{' '}
                             <strong style={{ color: 'var(--cur-white)' }}>
-                                {(usgoldValueCRNT * USD_PER_CRNT).toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
+                                {(cgcValueCRNT * USD_PER_CRNT).toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
                             </strong> based on the current gold price.
                         </p>
                     </div>
@@ -145,8 +149,8 @@ export function Account() {
                     digital version of cash that you can hold, send, and use.
                 </p>
                 <p style={{ color: 'var(--cur-muted)', margin: 0 }}>
-                    <strong style={{ color: 'var(--cur-white)' }}>USGold</strong> is a
-                    certificate for real gold. Each USGold certificate represents one whole
+                    <strong style={{ color: 'var(--cur-white)' }}>Current Gold</strong> is a
+                    certificate for real gold. Each Current Gold certificate represents one whole
                     1&nbsp;oz American Gold Eagle coin, stored securely on your behalf.
                 </p>
             </div>
@@ -217,12 +221,12 @@ export function Account() {
                     <div className="value">{balanceUSD}</div>
                 </div>
                 <div className="cur-stat">
-                    <div className="label">USGold Certificates</div>
-                    <div className="value gold">{toDisplayAmount(usgoldCount)}</div>
+                    <div className="label">Current Gold Certificates</div>
+                    <div className="value gold">{toDisplayAmount(cgcCount)}</div>
                 </div>
                 <div className="cur-stat">
-                    <div className="label">USGold Value (at {eaglePrice.toLocaleString()} CRNT each)</div>
-                    <div className="value gold">{usgoldValueCRNT.toLocaleString()} CRNT</div>
+                    <div className="label">Current Gold Value (at {eaglePrice.toLocaleString()} CRNT each)</div>
+                    <div className="value gold">{cgcValueCRNT.toLocaleString()} CRNT</div>
                 </div>
             </div>
 
@@ -233,9 +237,9 @@ export function Account() {
                     indivisible unit valued at <strong style={{ color: 'var(--cur-gold)' }}>$1.00 USD</strong>.
                 </p>
                 <p style={{ color: 'var(--cur-muted)', margin: 0 }}>
-                    Each USGold&trade; certificate represents one 1&nbsp;oz American Gold Eagle held
+                    Each Current Gold&trade; certificate represents one 1&nbsp;oz American Gold Eagle held
                     in custody. Use the <strong style={{ color: 'var(--cur-gold)' }}>Vault</strong> to
-                    swap between Current and USGold, and <strong style={{ color: 'var(--cur-gold)' }}>Redeem</strong>{' '}
+                    swap between Current and Current Gold, and <strong style={{ color: 'var(--cur-gold)' }}>Redeem</strong>{' '}
                     to request physical coin delivery.
                 </p>
             </div>

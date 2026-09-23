@@ -11,12 +11,17 @@
  *   v1.2.0  2026-06-12  Added a red banner (shown when useBalances() reports
  *           a read error) distinguishing "balance read failed" from "balance
  *           is genuinely 0" -- see useBalances.js v1.2.0.
+ *   v1.3.0  2026-09-23  Added TokenInfo panel below the stats grid --
+ *           surfaces contract reads (totalSupply, paused, owner,
+ *           pendingOwner, isMinter/isPauser for the connected wallet) that
+ *           existed on-chain but weren't in the ABI or shown anywhere.
  * ==========================================================================*/
 
 import React, { useState } from 'react';
 import { useAccount, useChainId } from 'wagmi';
 import { useBalances } from '../../components/useBalances';
 import { useMemberSince } from '../../components/useMemberSince';
+import { TokenInfo } from '../../components/TokenInfo';
 import { USD_PER_CRNT, TARGET_CHAIN } from '../../config/wagmi';
 import { toDisplayAmount } from '../../utils/tokenMath';
 import { walletShortName, walletDisplayAddress } from '../../utils/identity';
@@ -24,7 +29,7 @@ import { walletShortName, walletDisplayAddress } from '../../utils/identity';
 export function Home() {
     const { address } = useAccount();
     const chainId = useChainId();
-    const { currentBalance, usgoldCount, error: balanceError } = useBalances();
+    const { currentBalance, cgcCount, error: balanceError } = useBalances();
     const { memberSince, isNewMember } = useMemberSince(address);
 
     // Record the login time once per session (when this page first mounts
@@ -106,13 +111,17 @@ export function Home() {
                     <div className="value">{usdValue}</div>
                 </div>
                 <div className="cur-stat">
-                    <div className="label">USGold Certificates</div>
-                    <div className="value gold">{toDisplayAmount(usgoldCount)}</div>
+                    <div className="label">Current Gold Certificates</div>
+                    <div className="value gold">{toDisplayAmount(cgcCount)}</div>
                 </div>
                 <div className="cur-stat">
                     <div className="label">Access Level</div>
                     <div className="value">Verified Holder</div>
                 </div>
+            </div>
+
+            <div style={{ marginTop: 22 }}>
+                <TokenInfo />
             </div>
         </div>
     );

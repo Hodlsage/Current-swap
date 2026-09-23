@@ -1,6 +1,6 @@
 /* ============================================================================
  * FILE: src/pages/redeem/Redeem.jsx
- * PAGE: Redeem — USGold held + KYC form -> kyc@currentnetwork.us (wagmi).
+ * PAGE: Redeem — Current Gold Cert (CGC) held + KYC form -> kyc@currentnetwork.us (wagmi).
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-05-22  Cleanup pass 3 — ported to wagmi hooks.
@@ -26,8 +26,8 @@ const ID_TYPES = [
 
 export function Redeem() {
     const { address } = useAccount();
-    const { usgoldCount } = useBalances();
-    const held = Number(toDisplayAmount(usgoldCount));
+    const { cgcCount } = useBalances();
+    const held = Number(toDisplayAmount(cgcCount));
 
     const [form, setForm] = useState({
         name: '',
@@ -56,16 +56,16 @@ export function Redeem() {
     const idTypeLabel = ID_TYPES.find((t) => t.value === form.idType)?.label || '';
 
     const submit = () => {
-        const subject = encodeURIComponent(`USGold Redemption Request — ${form.quantity} coin(s)`);
+        const subject = encodeURIComponent(`Current Gold Redemption Request — ${form.quantity} coin(s)`);
         const body = encodeURIComponent(
-            `USGold Redemption Request\n--------------------------------\n` +
+            `Current Gold Redemption Request\n--------------------------------\n` +
             `Wallet: ${address}\nCertificates held: ${held}\n` +
             `Quantity to redeem: ${form.quantity}\n\nKYC Details\n` +
             `Full name: ${form.name}\nEmail: ${form.email}\n` +
             `Date of birth: ${form.dob}\nPhone: ${form.phone}\n` +
             `ID type: ${idTypeLabel}\nID number: ${form.idNumber}\n` +
             `Shipping address:\n${form.address}\n\n` +
-            `On confirmation, ${form.quantity} USGold certificate(s) will be sent to the ` +
+            `On confirmation, ${form.quantity} Current Gold certificate(s) will be sent to the ` +
             `Current Network Vault and the corresponding American Gold Eagle coin(s) shipped.\n`
         );
         window.location.href = `mailto:${REDEEM_EMAIL}?subject=${subject}&body=${body}`;
@@ -75,7 +75,7 @@ export function Redeem() {
         <div className="cur-page">
             <div className="cur-grid" style={{ marginBottom: 22 }}>
                 <div className="cur-stat">
-                    <div className="label">USGold Certificates Held</div>
+                    <div className="label">Current Gold Certificates Held</div>
                     <div className="value gold">{held}</div>
                 </div>
                 <div className="cur-stat">
@@ -89,7 +89,7 @@ export function Redeem() {
                 <p style={{ color: 'var(--cur-muted)' }}>
                     Complete the KYC details below to request delivery of your American Gold Eagle
                     coin(s). Your request is sent to our compliance desk
-                    (<span style={{ color: 'var(--cur-gold)' }}>{REDEEM_EMAIL}</span>) and your USGold
+                    (<span style={{ color: 'var(--cur-gold)' }}>{REDEEM_EMAIL}</span>) and your Current Gold
                     certificate(s) will be transferred into the Vault on confirmation.
                 </p>
 

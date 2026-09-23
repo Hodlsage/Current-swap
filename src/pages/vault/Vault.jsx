@@ -1,6 +1,6 @@
 /* ============================================================================
  * FILE: src/pages/vault/Vault.jsx
- * PAGE: Vault — custody reporting + FROM/TO swap box (Current <-> USGold) +
+ * PAGE: Vault — custody reporting + FROM/TO swap box (Current <-> Current Gold) +
  *       info (wagmi).
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
@@ -9,9 +9,13 @@
  *       otherwise uses a preview price. Swap wires to writeContract once live.
  *   v1.1.0  2026-06-12  Added custody reporting section (certificates in
  *           custody, Eagle price, total custody value = count * price). Uses
- *           live USGoldVault reads when VAULT_ADDRESS is configured for the
- *           connected chain; otherwise falls back to legacy USGold (USG)
- *           reference data (see config/legacyVaultData.js) as filler.
+ *           live Current Gold Vault reads when VAULT_ADDRESS is configured for
+ *           the connected chain; otherwise falls back to legacy USGold (USG)
+ *           reference data (see config/legacyVaultData.js) as filler -- "USGold"
+ *           here refers to the real, already-deployed V1 legacy contract on
+ *           Ethereum mainnet, which predates and is distinct from the current
+ *           Current Gold Cert (CGC) system; its historical name is kept
+ *           accurate rather than relabeled.
  *   v2.0.0  2026-06-12  "Certificates in Custody" now reads the LIVE balance
  *           of the legacy USGold V1 "old vault" wallet
  *           (0x08d43cc89A420C7E40c98a8BBb8096828C16Ab85) on Ethereum mainnet
@@ -26,6 +30,14 @@
  *           cur-grid into its own full-width row below the other custody
  *           stats (Certificates in Custody / Eagle Price / CRNT Reserve),
  *           per request.
+ *   v2.2.0  2026-09-23  Rebrand: USGold/USG -> Current Gold/CGC for
+ *           everything describing the CURRENT system (DIR enum, swap UI
+ *           labels, explainer copy). The real V1 legacy contract's
+ *           historical "USGold" name is kept accurate in comments -- see the
+ *           note above the imports. Also: the methodology/fallback-source
+ *           disclosure that used to render as visible page text is now a
+ *           code comment only (was two <p> blocks below the custody grid;
+ *           see the comment in their place).
  * ==========================================================================*/
 
 import React, { useState } from 'react';
@@ -34,18 +46,24 @@ import { useBalances } from '../../components/useBalances';
 import { useV1VaultBalance } from '../../components/useV1VaultBalance';
 import { getAddressesForChain } from '../../config/wagmi';
 import { VAULT_ABI } from '../../contracts/abis';
+// NOTE ON "USGold" IN THIS FILE: the real V1 legacy contract (Ethereum
+// mainnet, see useV1VaultBalance.js) was genuinely deployed under the name
+// "USGold" and predates the current rebrand -- that specific historical
+// reference is kept accurate rather than relabeled. Everything describing
+// the CURRENT system (labels, the swap UI, DIR enum, etc.) uses Current
+// Gold / CGC per the 2026-09-23 rebrand.
 import { LEGACY_VAULT_REFERENCE } from '../../config/legacyVaultData';
 import { toDisplayAmount } from '../../utils/tokenMath';
 
-const DIR = { CRNT_TO_USG: 'CRNT_TO_USG', USG_TO_CRNT: 'USG_TO_CRNT' };
+const DIR = { CRNT_TO_CGC: 'CRNT_TO_CGC', CGC_TO_CRNT: 'CGC_TO_CRNT' };
 
 export function Vault() {
     const { isConnected } = useAccount();
     const chainId = useChainId();
     const { VAULT_ADDRESS } = getAddressesForChain(chainId);
-    const { currentBalance, usgoldCount } = useBalances();
+    const { currentBalance, cgcCount } = useBalances();
 
-    const [direction, setDirection] = useState(DIR.CRNT_TO_USG);
+    const [direction, setDirection] = useState(DIR.CRNT_TO_CGC);
     const [amount, setAmount] = useState('');
 
     // Live Eagle price from the deployed vault (if configured), else preview.
@@ -97,10 +115,10 @@ export function Vault() {
         ? Number(reserveRead.data)
         : null;
 
-    const fromIsCurrent = direction === DIR.CRNT_TO_USG;
+    const fromIsCurrent = direction === DIR.CRNT_TO_CGC;
 
     const flip = () => {
-        setDirection((d) => (d === DIR.CRNT_TO_USG ? DIR.USG_TO_CRNT : DIR.CRNT_TO_USG));
+        setDirection((d) => (d === DIR.CRNT_TO_CGC ? DIR.CGC_TO_CRNT : DIR.CRNT_TO_CGC));
         setAmount('');
     };
 
@@ -163,25 +181,30 @@ export function Vault() {
                     </div>
                 </div>
 
-                {v1CertificatesAvailable ? (
-                    <p style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 14, marginBottom: 0 }}>
-                        "Certificates in Custody" reflects the live USGold V1 balance held in the
-                        legacy vault wallet on Ethereum (representing existing V1 holder volume).
-                        Eagle price: {LEGACY_VAULT_REFERENCE.sourceNote}
-                    </p>
-                ) : (
-                    <p style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 14, marginBottom: 0 }}>
-                        Showing reference/fallback data ({LEGACY_VAULT_REFERENCE.label}, as of{' '}
-                        {LEGACY_VAULT_REFERENCE.asOf}). {LEGACY_VAULT_REFERENCE.sourceNote}{' '}
-                        "Certificates in Custody" will switch automatically to the live USGold V1
-                        vault-wallet balance on Ethereum once that read succeeds (requires
-                        external network access).
-                    </p>
-                )}
+                {/* Client rev 2026-09-23: this methodology/fallback-source note used
+                  * to render as visible text on the page (two variants below, swapped
+                  * based on v1CertificatesAvailable). Per request, it's no longer shown
+                  * to users -- kept here as a comment instead, so the sourcing logic is
+                  * still documented for whoever maintains this later.
+                  *
+                  * LIVE-DATA VARIANT (when v1CertificatesAvailable is true):
+                  *   "Certificates in Custody" reflects the live USGold V1 balance held in
+                  *   the legacy vault wallet on Ethereum (representing existing V1 holder
+                  *   volume). Eagle price: [LEGACY_VAULT_REFERENCE.sourceNote -- see
+                  *   config/legacyVaultData.js / eaglePricing.js for the current wording
+                  *   and figures].
+                  *
+                  * FALLBACK VARIANT (when v1CertificatesAvailable is false):
+                  *   Showing reference/fallback data ([LEGACY_VAULT_REFERENCE.label], as of
+                  *   [LEGACY_VAULT_REFERENCE.asOf]). [LEGACY_VAULT_REFERENCE.sourceNote]
+                  *   "Certificates in Custody" will switch automatically to the live USGold
+                  *   V1 vault-wallet balance on Ethereum once that read succeeds (requires
+                  *   external network access).
+                  */}
 
                 {!liveVaultAvailable && (
                     <p style={{ color: 'var(--cur-muted)', fontSize: '.8rem', marginTop: 8, marginBottom: 0 }}>
-                        The swap mechanism below will activate once the USGoldVault contract is
+                        The swap mechanism below will activate once the Current Gold Vault contract is
                         deployed and configured for this network.
                     </p>
                 )}
@@ -193,18 +216,18 @@ export function Vault() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <div className="swap-row">
                         <input type="number" min="0" step="1" placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
-                        <span className="swap-token">{fromIsCurrent ? 'CRNT' : 'USGold'}</span>
+                        <span className="swap-token">{fromIsCurrent ? 'CRNT' : 'CGC'}</span>
                     </div>
                     <button className="swap-flip" type="button" onClick={flip} title="Flip direction" aria-label="Flip swap direction">⇅</button>
                     <div className="swap-row">
                         <input type="text" readOnly value={toAmount} />
-                        <span className="swap-token">{fromIsCurrent ? 'USGold' : 'CRNT'}</span>
+                        <span className="swap-token">{fromIsCurrent ? 'CGC' : 'CRNT'}</span>
                     </div>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--cur-muted)', fontSize: '.85rem', margin: '14px 0' }}>
                     <span>Eagle price: <strong style={{ color: 'var(--cur-gold)' }}>{eaglePrice} CRNT</strong></span>
-                    <span>You hold: {toDisplayAmount(currentBalance)} CRNT · {toDisplayAmount(usgoldCount)} USGold</span>
+                    <span>You hold: {toDisplayAmount(currentBalance)} CRNT · {toDisplayAmount(cgcCount)} CGC</span>
                 </div>
 
                 <button
@@ -221,9 +244,9 @@ export function Vault() {
                 <h2 style={{ fontSize: '1.1rem' }}>How the Vault works</h2>
                 <p style={{ color: 'var(--cur-muted)' }}>
                     The Vault holds a reserve of Current&trade; and a pre-minted inventory of
-                    USGold&trade; certificates. Swap <strong style={{ color: 'var(--cur-gold)' }}>Current &rarr; USGold</strong>{' '}
+                    Current Gold&trade; certificates. Swap <strong style={{ color: 'var(--cur-gold)' }}>Current &rarr; Current Gold</strong>{' '}
                     to acquire a certificate at the current American Gold Eagle price, or swap{' '}
-                    <strong style={{ color: 'var(--cur-gold)' }}>USGold &rarr; Current</strong> to return
+                    <strong style={{ color: 'var(--cur-gold)' }}>Current Gold &rarr; Current</strong> to return
                     a certificate and receive the live Eagle price in Current.
                 </p>
                 <p style={{ color: 'var(--cur-muted)', margin: 0 }}>
