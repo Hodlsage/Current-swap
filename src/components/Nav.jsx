@@ -37,6 +37,8 @@
  *           only appears below the mobile breakpoint (see theme.css); the
  *           links render in a slide-down panel when open, and auto-close on
  *           navigation so the menu doesn't stay open after picking a page.
+ *   v1.6.0  2026-09-23  Added "Profile" tab -> /profile (nickname/KYC
+ *           status/preferences, backed by Supabase + a SIWE session).
  * ==========================================================================*/
 
 import React, { useEffect, useState } from 'react';
@@ -75,6 +77,7 @@ export function Nav() {
                     {tab('/account', 'Account')}
                     {tab('/vault', 'Vault')}
                     {tab('/card', 'Card')}
+                    {tab('/profile', 'Profile')}
                 </nav>
 
                 <div className="cur-nav__actions">
