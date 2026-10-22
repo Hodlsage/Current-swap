@@ -10,9 +10,12 @@
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-09-23  Created.
+ *   v1.1.0  2026-10-22  Message must be a valid EIP-4361 (SIWE) message whose
+ *           nonce, address and domain (this site's host) all match.
  * ==========================================================================*/
 
 import { verifyMessage } from 'viem';
+import { parseSiweMessage, validateSiweMessage } from 'viem/siwe';
 import { verifyNonceToken, signSessionToken, setSessionCookie } from '../_lib/session.js';
 import { supabaseAdmin } from '../_lib/supabaseAdmin.js';
 
@@ -40,7 +43,15 @@ export default async function handler(req, res) {
     // 2. The nonce must actually appear in the signed message text -- this
     //    stops someone from taking a valid token and pairing it with a
     //    DIFFERENT message than the one the nonce was issued for.
-    if (!message.includes(nonce)) {
+    const parsed = parseSiweMessage(message);
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const okMessage = parsed.nonce === nonce && validateSiweMessage({
+        message: parsed,
+        address,
+        domain: host,
+        nonce,
+    });
+    if (!okMessage) {
         res.status(401).json({ error: 'Message does not match the sign-in request.' });
         return;
     }

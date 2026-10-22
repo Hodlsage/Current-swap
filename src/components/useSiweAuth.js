@@ -9,13 +9,18 @@
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-09-23  Created.
+ *   v1.1.0  2026-10-22  Message is now a strict EIP-4361 (SIWE) message built
+ *           with viem/siwe (adds Version + Chain ID), so MetaMask shows its
+ *           trusted sign-in screen instead of a raw-text warning.
  * ==========================================================================*/
 
 import { useCallback, useEffect, useState } from 'react';
-import { useAccount, useSignMessage } from 'wagmi';
+import { useAccount, useChainId, useSignMessage } from 'wagmi';
+import { createSiweMessage } from 'viem/siwe';
 
 export function useSiweAuth() {
     const { address, isConnected } = useAccount();
+    const chainId = useChainId();
     const { signMessageAsync } = useSignMessage();
 
     const [status, setStatus] = useState('checking'); // checking | signed_out | signing_in | signed_in | error
@@ -61,14 +66,16 @@ export function useSiweAuth() {
             if (!nonceRes.ok) throw new Error('Could not start sign-in.');
             const { nonce, token } = await nonceRes.json();
 
-            const domain = window.location.host;
-            const message =
-                `${domain} wants you to sign in with your Ethereum account:\n` +
-                `${address}\n\n` +
-                `Sign this message to verify wallet ownership. This is free and does not send a transaction.\n\n` +
-                `URI: ${window.location.origin}\n` +
-                `Nonce: ${nonce}\n` +
-                `Issued At: ${new Date().toISOString()}`;
+            const message = createSiweMessage({
+                address,
+                chainId,
+                domain: window.location.host,
+                nonce,
+                uri: window.location.origin,
+                version: '1',
+                statement: 'Sign this message to verify wallet ownership. This is free and does not send a transaction.',
+                issuedAt: new Date(),
+            });
 
             const signature = await signMessageAsync({ message });
 
@@ -89,7 +96,7 @@ export function useSiweAuth() {
             setError(e.message || 'Sign-in failed.');
             setStatus('signed_out');
         }
-    }, [address, signMessageAsync, loadProfile]);
+    }, [address, chainId, signMessageAsync, loadProfile]);
 
     const signOut = useCallback(async () => {
         await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {});
