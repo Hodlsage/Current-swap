@@ -32,7 +32,7 @@ export function MoneyIn() {
 
     return (
         <div className="cur-card" style={{ marginBottom: 22 }}>
-            <h2 style={{ fontSize: '1.1rem', marginTop: 0 }}>Money In</h2>
+            <h2 style={{ fontSize: '1.1rem', marginTop: 0 }}>Account Data:</h2>
 
             {status === 'checking' && <p style={{ color: 'var(--cur-muted)', margin: 0 }}>Loading...</p>}
 
