@@ -39,6 +39,9 @@
  *           navigation so the menu doesn't stay open after picking a page.
  *   v1.6.0  2026-09-23  Added "Profile" tab -> /profile (nickname/KYC
  *           status/preferences, backed by Supabase + a SIWE session).
+ *   v1.7.0  2026-10-22  "Admin" tab shown only when the session wallet is an
+ *           admin (profile.is_admin from /api/profile). Display only; the
+ *           API enforces access.
  * ==========================================================================*/
 
 import React, { useEffect, useState } from 'react';
@@ -48,11 +51,20 @@ import { WalletButton } from './WalletButton';
 export function Nav() {
     const { pathname } = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     // Auto-close the mobile menu whenever the route changes (picking a link
     // should close it, not leave it hanging open over the new page).
     useEffect(() => {
         setMenuOpen(false);
+    }, [pathname]);
+
+    // Re-check on each navigation so the link appears right after sign-in.
+    useEffect(() => {
+        fetch('/api/profile', { credentials: 'include' })
+            .then((r) => (r.ok ? r.json() : null))
+            .then((p) => setIsAdmin(!!p?.is_admin))
+            .catch(() => setIsAdmin(false));
     }, [pathname]);
 
     const tab = (to, label) => (
@@ -78,6 +90,7 @@ export function Nav() {
                     {tab('/vault', 'Vault')}
                     {tab('/card', 'Card')}
                     {tab('/profile', 'Profile')}
+                    {isAdmin && tab('/admin', 'Admin')}
                 </nav>
 
                 <div className="cur-nav__actions">

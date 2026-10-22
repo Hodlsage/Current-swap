@@ -17,6 +17,8 @@
  *           Profile itself further requires a verified signature session
  *           (see useSiweAuth.js) before showing any data -- connected alone
  *           isn't enough to read/write off-chain profile data.
+ *   v1.3.0  2026-10-22  Added /admin route (record money in; admin wallets only,
+ *           enforced by the API -- see api/admin/deposits.js).
  * ==========================================================================*/
 
 import React from 'react';
@@ -32,6 +34,7 @@ import { Account } from './pages/account/Account';
 import { Vault } from './pages/vault/Vault';
 import { Card } from './pages/card/Card';
 import { Profile } from './pages/profile/Profile';
+import { Admin } from './pages/admin/Admin';
 
 /**
  * RequireWallet: renders children only when a wallet is connected. Otherwise it
@@ -54,6 +57,7 @@ export default function App() {
                     <Route path="/vault" element={<RequireWallet><Vault /></RequireWallet>} />
                     <Route path="/card" element={<RequireWallet><Card /></RequireWallet>} />
                     <Route path="/profile" element={<RequireWallet><Profile /></RequireWallet>} />
+                    <Route path="/admin" element={<RequireWallet><Admin /></RequireWallet>} />
                 </Routes>
             </div>
             <Footer />

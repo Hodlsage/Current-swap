@@ -368,3 +368,12 @@ body {
 @media (max-width: 480px) {
     .cur-btn--block { width: 100%; justify-content: center; }
 }
+
+/* ---- Money In / Admin ledger tables (v0.3.1, 2026-10-22) ---- */
+.cur-ledger-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cur-ledger { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.cur-ledger th { color: var(--cur-muted); font-weight: 600; text-align: left; font-size: .8rem; padding: 8px 10px; border-bottom: 1px solid var(--cur-line); white-space: nowrap; }
+.cur-ledger td { padding: 10px; border-bottom: 1px solid var(--cur-line); white-space: nowrap; }
+.cur-ledger .num { text-align: right; }
+.cur-ledger tr.is-void td { opacity: .45; text-decoration: line-through; }
+.cur-ledger tr.is-void td:last-child { text-decoration: none; }

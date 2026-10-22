@@ -18,6 +18,7 @@
 
 import { readSessionCookie } from './_lib/session.js';
 import { supabaseAdmin } from './_lib/supabaseAdmin.js';
+import { isAdminWallet } from './_lib/admin.js';
 
 export default async function handler(req, res) {
     const walletAddress = readSessionCookie(req);
@@ -37,7 +38,8 @@ export default async function handler(req, res) {
             res.status(500).json({ error: 'Could not load profile.' });
             return;
         }
-        res.status(200).json(data);
+        // is_admin lets the UI show the Admin link; real enforcement is server-side.
+        res.status(200).json({ ...data, is_admin: isAdminWallet(walletAddress) });
         return;
     }
 

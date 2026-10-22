@@ -33,10 +33,13 @@
  *   v1.5.0  2026-09-23  Rebrand: USGold/USG -> Current Gold/CGC everywhere
  *           on this page (variable names, labels, body copy). See
  *           useBalances.js v1.3.0 for the underlying hook rename.
+ *   v1.6.0  2026-10-22  Added the "Money In" ledger (components/MoneyIn.jsx):
+ *           deposits recorded for this wallet with rolling totals.
  * ==========================================================================*/
 
 import React from 'react';
 import { useAccount, useChainId, useReadContract } from 'wagmi';
+import { MoneyIn } from '../../components/MoneyIn';
 import { useBalances } from '../../components/useBalances';
 import { useMemberSince } from '../../components/useMemberSince';
 import { USD_PER_CRNT, TARGET_CHAIN, getAddressesForChain } from '../../config/wagmi';
@@ -209,6 +212,8 @@ export function Account() {
                     </p>
                 )}
             </div>
+
+            <MoneyIn />
 
             {/* ---- Holdings (detailed) ---- */}
             <div className="cur-grid">
