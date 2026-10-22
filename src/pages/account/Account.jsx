@@ -203,10 +203,7 @@ export function Account() {
                         {EXPLORER && (
                             <>
                                 {' '}&middot;{' '}
-                                <a href={`${EXPLORER}/address/${address}`} target="_blank" rel="noreferrer"
-                                   style={{ color: 'var(--cur-gold)' }}>
-                                    View on explorer
-                                </a>
+                                
                             </>
                         )}
                     </p>
