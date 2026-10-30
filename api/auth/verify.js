@@ -10,6 +10,9 @@
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-09-23  Created.
+ *   v1.2.0  2026-10-30  Profile-step failures now log the real database error and
+ *           return it as `detail` so the cause (paused project, bad key,
+ *           missing table) is visible instead of a generic message.
  *   v1.1.0  2026-10-22  Message must be a valid EIP-4361 (SIWE) message whose
  *           nonce, address and domain (this site's host) all match.
  * ==========================================================================*/
@@ -81,7 +84,11 @@ export default async function handler(req, res) {
         .upsert({ wallet_address: walletAddress }, { onConflict: 'wallet_address', ignoreDuplicates: true });
 
     if (upsertError) {
-        res.status(500).json({ error: 'Could not create or load your profile. Please try again.' });
+        console.error('profiles upsert failed:', upsertError);
+        res.status(500).json({
+            error: 'Could not create or load your profile. Please try again.',
+            detail: String(upsertError.message || upsertError.code || 'unknown').slice(0, 200),
+        });
         return;
     }
 

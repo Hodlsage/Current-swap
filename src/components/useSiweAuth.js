@@ -96,7 +96,7 @@ export function useSiweAuth() {
 
             if (!verifyRes.ok) {
                 const body = await verifyRes.json().catch(() => ({}));
-                throw new Error(body.error || 'Sign-in failed.');
+                throw new Error((body.error || 'Sign-in failed.') + (body.detail ? ` (${body.detail})` : ''));
             }
 
             await loadProfile();
