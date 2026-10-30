@@ -9,6 +9,9 @@
  * ----------------------------------------------------------------------------
  * REVISION CONTROL
  *   v1.0.0  2026-09-23  Created.
+ *   v1.2.0  2026-10-30  Stale-wallet self-heal: if the saved wallet connection is
+ *           broken ("connector.getChainId is not a function"), clear it and
+ *           reload so the user can reconnect cleanly (utils/walletReset.js).
  *   v1.1.0  2026-10-22  Message is now a strict EIP-4361 (SIWE) message built
  *           with viem/siwe (adds Version + Chain ID), so MetaMask shows its
  *           trusted sign-in screen instead of a raw-text warning.
@@ -17,9 +20,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAccount, useChainId, useSignMessage } from 'wagmi';
 import { createSiweMessage } from 'viem/siwe';
+import { resetWalletConnection, isStaleConnector } from '../utils/walletReset';
 
 export function useSiweAuth() {
-    const { address, isConnected } = useAccount();
+    const { address, isConnected, connector } = useAccount();
     const chainId = useChainId();
     const { signMessageAsync } = useSignMessage();
 
@@ -54,8 +58,12 @@ export function useSiweAuth() {
             setProfile(null);
             return;
         }
+        if (isStaleConnector(connector)) {
+            resetWalletConnection(); // saved connection is broken -- clear + reload
+            return;
+        }
         loadProfile();
-    }, [isConnected, address, loadProfile]);
+    }, [isConnected, address, connector, loadProfile]);
 
     const signIn = useCallback(async () => {
         if (!address) return;
@@ -93,10 +101,14 @@ export function useSiweAuth() {
 
             await loadProfile();
         } catch (e) {
+            if (/getChainId is not a function/i.test(e?.message || '') || isStaleConnector(connector)) {
+                resetWalletConnection();
+                return;
+            }
             setError(e.message || 'Sign-in failed.');
             setStatus('signed_out');
         }
-    }, [address, chainId, signMessageAsync, loadProfile]);
+    }, [address, chainId, connector, signMessageAsync, loadProfile]);
 
     const signOut = useCallback(async () => {
         await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {});

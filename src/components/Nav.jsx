@@ -39,6 +39,8 @@
  *           navigation so the menu doesn't stay open after picking a page.
  *   v1.6.0  2026-09-23  Added "Profile" tab -> /profile (nickname/KYC
  *           status/preferences, backed by Supabase + a SIWE session).
+ *   v1.8.0  2026-10-30  Self-heals a stale saved wallet connection on ANY page
+ *           (clears it + reloads) -- see utils/walletReset.js.
  *   v1.7.0  2026-10-22  "Admin" tab shown only when the session wallet is an
  *           admin (profile.is_admin from /api/profile). Display only; the
  *           API enforces access.
@@ -46,12 +48,19 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 import { WalletButton } from './WalletButton';
+import { resetWalletConnection, isStaleConnector } from '../utils/walletReset';
 
 export function Nav() {
     const { pathname } = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const { connector } = useAccount();
+
+    useEffect(() => {
+        if (isStaleConnector(connector)) resetWalletConnection();
+    }, [connector]);
 
     // Auto-close the mobile menu whenever the route changes (picking a link
     // should close it, not leave it hanging open over the new page).
